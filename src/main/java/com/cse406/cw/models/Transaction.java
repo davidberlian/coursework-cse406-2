@@ -1,30 +1,47 @@
 package com.cse406.cw.models;
 
 import java.util.ArrayList;
+import java.util.Locale;
+import java.text.NumberFormat;
 
 public class Transaction {
 	
 	private String datetime;
 	private String message;
-	private String amount;
+	private Double amount;
+	private String amountstring;
+	private String creditdebit;
+	private String currentbalance;
 	
 	public Transaction(String datetime, String message, String amount) {
+
 		this.datetime = datetime;
 		this.message = message;
-		this.amount = amount;
+		System.out.println("nilai amount 0= "+amount);
+		if(amount.contains("-")) {
+			this.amount = Double.parseDouble(amount.substring(1));
+			this.amount *= -1;
+			this.creditdebit = "DEBIT";
+		}else {
+			this.amount = Double.parseDouble(amount);
+			this.creditdebit = "CREDIT";
+		}
+        NumberFormat format = NumberFormat.getCurrencyInstance(Locale.US);
+		this.amountstring = format.format(this.amount);
 	}
 	
-	public static ArrayList<String[]> loadTransaction(String username){
+	public static ArrayList<String[]> loadTransaction(String username, String time){
 		ArrayList<String[]> a = new ArrayList<String[]>();
 		System.out.println("EXECUTE SQL");
 		try {
 			DB_Connection conn = new DB_Connection();
 			String query = 
-					"SELECT * "+
+					"SELECT transaction_message,transaction_amount,transaction_time "+
 					"FROM `transaction` "+
 					"JOIN savings ON savings.id = transaction.savings_id "+
 					"JOIN user ON user.id = savings.user_id "+
-					"WHERE user.username ='"+username+"' ";
+					"WHERE user.username ='"+username+"' "+
+					"AND transaction_time LIKE '"+time+"%'";
 			System.out.println(query);
 			ArrayList<String[]> Response= conn.read_query(
 					query
@@ -56,12 +73,46 @@ public class Transaction {
 		this.message = message;
 	}
 
-	public String getAmount() {
+	public Double getAmount() {
 		return amount;
 	}
 
-	public void setAmount(String amount) {
+	public void setAmount(Double amount) {
 		this.amount = amount;
 	}
-	
+
+
+	public String getAmountstring() {
+		return amountstring;
+	}
+
+	public void setAmountstring(String amountstring) {
+		this.amountstring = amountstring;
+	}
+
+	public String getCreditdebit() {
+		return creditdebit;
+	}
+
+	public void setCreditdebit(String creditdebit) {
+		this.creditdebit = creditdebit;
+	}
+
+	public String getCurrentbalance() {
+		return currentbalance;
+	}
+
+	public void setCurrentbalance(String currentbalance) {
+		this.currentbalance = currentbalance;
+	}
 }
+
+	/*
+	 * 
+	 * 
+	 * 
+DELIMITER $$
+CREATE EVENT update_monthly_balance
+ON SCHEDULE EVERY '1' MONTH
+DO CALL check_new_balance;
+*/

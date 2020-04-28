@@ -14,13 +14,14 @@ public class User {
 	private String password;
 	private String savings;
 	private String token;
+	private String fullName;
+
+	private String accountNumber;
 
 	public User() {
 
 	}
 	
-	
-
 	public User(String username, String password) {
 		this.username = username;
 		this.password = password;
@@ -118,15 +119,16 @@ public class User {
 		
 		// remove all old token
 		
-		String query = "SELECT * FROM `token` WHERE id = '"+this.token+
+		String query = "SELECT * FROM `token` JOIN user ON user.username = token.username JOIN savings ON savings.user_id = user.id  WHERE token.id = '"+this.token+
 				"' AND active = true";
 		
 		System.out.println(query);
 		
-		ArrayList<String[]> result = conn.read_query(query, new String[] {"active"});
+		ArrayList<String[]> result = conn.read_query(query, new String[] {"active", "first_name","last_name","savings.id"});
 			
 		if(!result.isEmpty()) {
-			
+			this.fullName = result.get(0)[1]+" "+result.get(0)[2];
+			this.accountNumber =result.get(0)[3];
 			return true;
 		}else {
 			return false;
@@ -211,6 +213,30 @@ public class User {
 	public String toString() {
 	    return this.username+"|"+this.token;
 	  }
+
+
+
+	public String getFullName() {
+		return fullName;
+	}
+
+
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+
+
+
+	public String getAccountNumber() {
+		return accountNumber;
+	}
+
+
+
+	public void setAccountNumber(String accountNumber) {
+		this.accountNumber = accountNumber;
+	}
   
 
 }

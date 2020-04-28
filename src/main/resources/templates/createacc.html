@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+asda
+    <div th:if="${message}" th:text="${message}" th:class="${'alert ' + alertClass}"></div>
+    
+    	<form action="#" th:action="@{/createaccount}" th:object="${dummyAccount}" method="post">
+    		<input type="text" placeholder="First Name" th:field="*{first_name}" />
+    		<input type="text" placeholder="Last name" th:field="*{last_name}" />
+    		<input type="number" placeholder="Init Balance" th:field="*{initial_balance}" />
+    		<input type="text" placeholder="Savings ID" th:field="*{savings_id}" />
+    		<input type="password" placeholder="password" th:field="*{password}" />
+    		<button type="submit" style="font-size:80%"><b>Creeate</b></button> 
+    	</form>
+    	
+</body>
+</html>

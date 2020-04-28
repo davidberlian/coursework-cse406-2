@@ -1,25 +1,106 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body> 
 <p th:text="'Hello, ' + ${user.username} + '!'" />
 
-      <a href="home">home</a>
- <table>
-      <tr>
+
+    
+    
+<div class="w3-container">
+	<div class="row">
+		<h2>Account Information</h2>
+		<form th:action="@{/transaction}" method="get">
+		  <label for="cars">Choose a month:</label>
+		  <select id="month" name="month" >
+  		    <option th:each="option : ${options}" th:value="${option.id}" th:text="${option.text}"></option>
+		  </select>
+		  <input type="submit">
+		</form>
+ 	</div>
+  
+	<div class="w3-container">
+	
+	  <table class="w3-table-all w3-hoverable">
+	    <thead>
+	      
+	    </thead>
+	    <tr>
+	      <td>Account Number</td>
+	      <td th:text=${user.accountNumber}></td>
+	    </tr>
+	    <tr>
+	      <td>Full Name</td>
+	      <td th:text=${user.fullName}></td>
+	    </tr>
+	    <tr>
+	      <td>Currency</td>
+	      <td>USD</td>
+	    </tr>
+	    <tr>
+	      <td>Period</td>
+	      <td th:text=${period}></td>
+	    </tr>
+	  </table>
+	</div>
+<hr>
+</div>
+    
+<div class="w3-container">
+  <h2>Account Statement</h2>
+<hr>
+  <table class="w3-table-all w3-hoverable">
+    <thead>
+      <tr class="w3-light-grey">
         <th>Date time</th>
         <th>Message</th>
         <th>Amount</th>
+        <th>Current Balance</th>
       </tr>
-      <tr th:each="transaction : ${transactions}">
+    </thead>
+       <tr th:each="transaction : ${transactions}">
         <td th:text="${transaction.datetime}"></td>
-        <td th:text="${transaction.amount}"></td>
         <td th:text="${transaction.message}"></td>
+        <td class="w3-right-align" th:text="${transaction.amountstring}"></td>
+        <td th:text="${transaction.currentbalance}"></td>
       </tr>
-    </table>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Starting Balance</td>
+      <td>:</td>
+      <td class="w3-right-align" ></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Total Credit</td>
+      <td>:</td>
+      <td class="w3-right-align" th:text="${totalCredit}"></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Total Debit</td>
+      <td>:</td>
+      <td class="w3-right-align" th:text="${totalDebit}"></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Ending Balance</td>
+      <td>:</td>
+      <td class="w3-right-align" th:text="${currentBalance}"></td>
+      <td></td>
+    </tr>
+  </table>
+</div>
 
 </body>
 </html>
