@@ -71,4 +71,51 @@ public class MainController {
 			return "login";
 		}
 	}
+	@GetMapping("/setting")
+	public String setting(Model model, HttpServletRequest request) { 
+		
+		User user = new User();
+		HttpSession newSession = request.getSession(); 
+		System.out.println("SESSION DATA" + newSession.getAttribute("token").toString());
+		user.setUsername(newSession.getAttribute("username").toString());
+		user.setToken(newSession.getAttribute("token").toString());	
+		
+		if(user.checkToken()) {	
+			
+			model.addAttribute("user", user);
+			return "setting";	
+			
+		}else {
+			System.out.println("Failed");	 
+			model.addAttribute("message", "Please Login!");  
+		    model.addAttribute("user", new User());
+			newSession.invalidate();
+			return "login";
+		}
+	
+	}
+
+
+	@GetMapping("/personal") 
+	public String personal(Model model, HttpServletRequest request) { 
+		
+		User user = new User();
+		HttpSession newSession = request.getSession(); 
+		System.out.println("SESSION DATA" + newSession.getAttribute("token").toString());
+		user.setUsername(newSession.getAttribute("username").toString());
+		user.setToken(newSession.getAttribute("token").toString());	
+		
+		if(user.checkToken()) {	
+			
+			model.addAttribute("user", user);
+			return "personal";	
+			
+		}else {
+			System.out.println("Failed");	 
+			model.addAttribute("message", "Please Login!");  
+		    model.addAttribute("user", new User());
+			newSession.invalidate();
+			return "login";
+		}
+	}
 }
