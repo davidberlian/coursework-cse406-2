@@ -30,6 +30,32 @@ public class Transaction {
 		this.amountstring = format.format(this.amount);
 	}
 	
+	public static Double loadTransactionBalance(String username, String month) {
+		Double balance = 0D;
+		
+		try {
+			DB_Connection conn = new DB_Connection();
+			String query = 
+					"SELECT amount FROM month_balance "+
+					"JOIN savings ON savings.id = month_balance.savings_id "+
+					"JOIN user ON user.id = savings.user_id "+
+					" WHERE month = '"+month+"'"+
+					"AND user.username = '"+username+"'";
+			System.out.println(query);
+			ArrayList<String[]> Response= conn.read_query(query,new String[]{"amount"});
+			if(Response.isEmpty()) {
+				return 0D;
+			}else {
+				return Double.parseDouble(Response.get(0)[0]);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return balance;
+	}
+	
 	public static ArrayList<String[]> loadTransaction(String username, String time){
 		ArrayList<String[]> a = new ArrayList<String[]>();
 		System.out.println("EXECUTE SQL");

@@ -89,9 +89,6 @@ public class MainController {
 			
 			model.addAttribute("user", user);
 
-			Double totalDebit = 0D;
-			Double totalCredit = 0D;
-			Double currentBalance = 0D;
 
 			
 	        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM");  
@@ -102,7 +99,14 @@ public class MainController {
 	        	picked = LocalDateTime.parse(month+"-01T00:00:01");
 	        }
 	        
-	        System.out.println(picked.format(dtf));
+
+			Double totalDebit = 0D;
+			Double totalCredit = 0D;
+			Double startingBalance = Transaction.loadTransactionBalance(user.getUsername(), picked.format(dtf));
+			Double currentBalance = startingBalance;
+			
+	        System.out.println("CURRENT BALANCE" + currentBalance);
+	        
 	        ArrayList<String[]> list = null;
 			
 				list = Transaction.loadTransaction(user.getUsername(), picked.format(dtf));
@@ -129,21 +133,24 @@ public class MainController {
 			for(int i = 0; i<list.size(); i++) {
 				System.out.println("Success+"+i);
 				listOfTransaction.add(new Transaction(list.get(i)[2],list.get(i)[0],list.get(i)[1]));
+
+		        System.out.println("CURRENT BALANCE BEFORE" + currentBalance);
 				if(listOfTransaction.get(i).getCreditdebit().contentEquals("CREDIT")) {
 					totalCredit += listOfTransaction.get(i).getAmount();
-					currentBalance += listOfTransaction.get(i).getAmount();
 				}else {
 					totalDebit += listOfTransaction.get(i).getAmount();
-					currentBalance -= listOfTransaction.get(i).getAmount();
 				}
+				currentBalance += listOfTransaction.get(i).getAmount();
 				listOfTransaction.get(i).setCurrentbalance(format.format(currentBalance));
+		        System.out.println("CURRENT BALANCE" + currentBalance);
 			}
 			
 			model.addAttribute("transactions",listOfTransaction);
-			
+
+			model.addAttribute("startingBalance",format.format(startingBalance));
 			model.addAttribute("totalDebit",format.format(totalDebit));
 			model.addAttribute("totalCredit",format.format(totalCredit));
-			model.addAttribute("currentBalance",format.format(totalCredit-totalDebit));
+			model.addAttribute("currentBalance",format.format(currentBalance));
 			
 			return "transaction";	
 			
