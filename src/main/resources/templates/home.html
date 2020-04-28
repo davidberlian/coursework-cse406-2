@@ -34,7 +34,7 @@
 	<div class="img" >
 		<img th:src="@{/resources/img/balance.png}" alt="balance" style="width:300px;height:250px">
 		<div class="topcentered" style="color: #4F4E56">Cash Balance</div>
-		<div class="centered" style="color: #4F4E56; font-size:350%"><p th:text="'$' + ${user.savings}" /></div>
+		<div class="centered" style="color: #4F4E56; font-size:350%"><p th:text="${userBalance}" /></div>
 	</div>
 	
 	 

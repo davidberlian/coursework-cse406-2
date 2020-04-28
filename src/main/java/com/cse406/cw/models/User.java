@@ -12,7 +12,7 @@ public class User {
 	
 	private String username;
 	private String password;
-	private String savings;
+	private Double savings;
 	private String token;
 	private String fullName;
 
@@ -47,7 +47,7 @@ public class User {
 		this.password = password;
 	}
 	
-	public String getSavings() {
+	public Double getSavings() {
 		this.savings = checkSavings();
 		return this.savings;
 	}
@@ -65,7 +65,7 @@ public class User {
 	
 	DB_Connection conn = null;
 	
-	public String checkSavings() {
+	public Double checkSavings() {
 		System.out.println("EXECUTE SQL");
 		try {
 			conn = new DB_Connection();
@@ -79,12 +79,12 @@ public class User {
 				System.out.println("not found");
 			}else {
 				System.out.println(Response.get(0)[1]);
-				return Response.get(0)[1];
+				return Double.parseDouble(Response.get(0)[1]);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "0";
+		return 0D;
 	}
 	
 	

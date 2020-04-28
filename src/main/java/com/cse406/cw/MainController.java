@@ -64,8 +64,11 @@ public class MainController {
 		user.setToken(newSession.getAttribute("token").toString());	
 		
 		if(user.checkToken()) {	
-			
+
+	        NumberFormat format = NumberFormat.getCurrencyInstance(Locale.US);
+	        String userBalance = format.format(user.getSavings());
 			model.addAttribute("user", user);
+			model.addAttribute("userBalance", userBalance);
 			return "home";	
 			
 		}else {
