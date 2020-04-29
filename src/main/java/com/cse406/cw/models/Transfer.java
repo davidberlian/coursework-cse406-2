@@ -13,6 +13,95 @@ public class Transfer {
     private String amountCurr;
     private String message;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+
+    public String getResponse() {
+        return response;
+    }
+
+    public void setResponse(String response) {
+        this.response = response;
+    }
+
+    private String response;
+
+    private int id;
+    private String receiver;
+    private String requester;
+    private String name1;
+    private String name2;
+    private String time;
+    private String status;
+    public String getReceiver() {
+        return receiver;
+    }
+
+    public void setReceiver(String receiver) {
+        this.receiver = receiver;
+    }
+
+    public String getRequester() {
+        return requester;
+    }
+
+    public void setRequester(String requester) {
+        this.requester = requester;
+    }
+
+    public String getName1() {
+        return name1;
+    }
+
+    public void setName1(String name1) {
+        this.name1 = name1;
+    }
+
+    public String getName2() {
+        return name2;
+    }
+
+    public void setName2(String name2) {
+        this.name2 = name2;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+
+    public Transfer(String receiver, String requester, String name1,String message, String name2,
+                    String amount, String status,String time, int id){
+        this.receiver = receiver;
+        this.requester = requester;
+        this.message = message;
+        this.name1 = name1;
+        this.name2 = name2;
+        this.amount = Double.parseDouble(amount);
+        this.time = time;
+        this.status = status;
+        this.id = id;
+    }
+
     public String toString(){
         return this.accountNumber + " " + this.message + " " + this.destination_id + " " + this.amount;
     }
@@ -59,6 +148,40 @@ public class Transfer {
         this.accountNumber = accountNumber;
     }
 
+    public ArrayList<String[]> loadRequest(){
+        ArrayList<String[]> a = new ArrayList<String[]>();
+        System.out.println("EXECUTE SQL");
+        try {
+            DB_Connection conn = new DB_Connection();
+            String query =
+                    "SELECT tr.id as id, " +
+                            "tr.savings_id as requester, " +
+                            "tr.destination_id as receiver, " +
+                            "s1.first_name as name1, " +
+                            "s2.first_name as name2, " +
+                            "tr.transaction_message as message, " +
+                            "tr.transaction_amount as amount, " +
+                            "tr.status as status," +
+                            "tr.transaction_time as time "+
+                            "FROM transaction_request as tr "+
+                            "JOIN savings as s1 ON s1.id = tr.savings_id "+
+                            "JOIN savings as s2 ON s2.id = tr.destination_id "+
+                            "WHERE tr.savings_id ='"+this.accountNumber+"' " +
+                            "OR tr.destination_id = '"+this.accountNumber+"' ";
+            System.out.println(query);
+            ArrayList<String[]> Response= conn.read_query(
+                    query
+                    ,new String[]{"requester","receiver","name1", "name2", "message","amount","status","time","id"});
+            if(Response.isEmpty()) {
+                System.out.println("not found");
+            }else {
+                return Response;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return a;
+    }
     public boolean checkDestination(){
         try {
             DB_Connection conn = new DB_Connection();

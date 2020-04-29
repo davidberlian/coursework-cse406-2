@@ -48,15 +48,11 @@
 			<button type="submit">
 				<br><br><i class="fas fa-exchange-alt"  style = "font-size: 400%"></i> <br><br> Transfer<br><br></button>
 		</form>
-			
+		<form action="#" th:action="@{/request}">
+			<button type="submit">
+				<br><br><i class="fas fa-scroll"  style = "font-size: 400%"></i> <br><br> Request<br><br></button>
+		</form>
 
-		
-			<form:form method="POST" action="" modelAttribute="user">
-				<form:hidden path="username" />
-				<form:hidden path="token" />
-						<button type="submit">
-						<br><br><i class="fas fa-scroll" style = "font-size: 400%"></i> <br><br> Make a request<br><br> </button>
-				</form:form>
 	</div>
 </div>
 	

@@ -12,7 +12,8 @@ public class Transaction {
 	private String amountstring;
 	private String creditdebit;
 	private String currentbalance;
-	
+
+
 	public Transaction(String datetime, String message, String amount) {
 
 		this.datetime = datetime;
