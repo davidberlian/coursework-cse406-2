@@ -44,7 +44,7 @@ public class dummyAccount {
 				
 		        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM");  		        
 		        LocalDateTime picked = LocalDateTime.now();		        
-		        query = "INSERT INTO month_balance(savings_id, month, amount) VALUES('"+this.savings_id+"','"+picked.format(dtf)+"',"+this.initial_balance+")";
+		        query = "INSERT INTO month_balance(savings_id, month, amount) VALUES('"+this.savings_id+"','"+picked.format(dtf)+"',0)";
 		        System.out.println(query);
 					result = conn.write_query(query);
 				if(result) {

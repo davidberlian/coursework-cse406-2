@@ -33,32 +33,15 @@
 	<div class="img" >
 		<img th:src="@{/resources/img/balance.png}" alt="balance" style="width:300px;height:250px">
 		<div class="topcentered" style="color: #4F4E56">Cash Balance</div>
-		<div class="centered" style="color: #4F4E56; font-size:350%"><p th:text="${userBalance}" /></div>
+		<div class="centered" style="color: #4F4E56; font-size:350%"><p th:text="'$' + ${user.savings}" /></div>
 	</div>
 	
 	 
 <br>
-	<div class="btn-group">
-			<form action="#" th:action="@{/transaction}">
-				<button type="submit"> 
-				<br><br><i class="fas fa-money-check-alt"  style = "font-size: 400%"></i> <br><br> Check Transaction<br><br></button>
-			</form>
-			
-		
-			<form:form method="POST" action="transfer.htm" modelAttribute="user">
-				<form:hidden path="username" />
-				<form:hidden path="token" />
-						<button type="submit">
-						<br><br><i class="fas fa-exchange-alt"  style = "font-size: 400%"></i> <br><br> Transfer<br><br></button>
-				</form:form>
-		
-			<form:form method="POST" action="" modelAttribute="user">
-				<form:hidden path="username" />
-				<form:hidden path="token" />
-						<button type="submit">
-						<br><br><i class="fas fa-scroll" style = "font-size: 400%"></i> <br><br> Make a request<br><br> </button>
-				</form:form>
-	</div>
+	
+	
+	<p> This is the personal page </p>
+	
 </div>
 	
 
