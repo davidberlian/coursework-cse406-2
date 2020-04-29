@@ -15,11 +15,11 @@ public class Signup {
 	}
 	
 	public Boolean checkfield() {
-		if(this.username.isBlank() ||
-				this.password.isBlank() ||
-				this.password2.isBlank() ||
-				this.savings_id.isBlank() ||
-				this.dob.isBlank()) {
+		if(this.username.isEmpty() ||
+				this.password.isEmpty() ||
+				this.password2.isEmpty() ||
+				this.savings_id.isEmpty() ||
+				this.dob.isEmpty()) {
 			return false;
 		}else {
 			return true;
@@ -38,7 +38,7 @@ public class Signup {
 				return false;
 			}else {
 				System.out.println(Response.get(0)[0]);
-				if(!Response.get(0)[0].isBlank()) {
+				if(!Response.get(0)[0].isEmpty()) {
 					Boolean result = false;		
 					result = conn.write_query("INSERT INTO  `user`(`password`, `username`) VALUES ('"+this.password+
 					"','"+this.username+"')");
