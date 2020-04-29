@@ -4,24 +4,38 @@
 
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <meta charset="UTF-8">
-<title>Transactioni</title>
+
+<title>Account Transaction</title>
+<script src="https://kit.fontawesome.com/6e68db03e6.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" th:href="@{/resources/css/transaction.css}"/>
+
+
+<title>Transaction</title>
+
 </head>
 <body> 
-<p th:text="'Hello, ' + ${user.username} + '!'" />
 
+<div class="sidebar">
+<br>
+  <a href="home"><i class="fa fa-fw fa-home"></i> Home</a><br>
+  <a href="#services"><i class="fa fa-fw fa-wrench"></i> Setting</a><br>
+  <a href="#clients"><i class="fa fa-fw fa-user"></i> Personal Info</a><br>
+  <a href="#contact"><i class="fa fa-fw fa-envelope"></i> Contact Us</a><br>
+</div>
 
-    
+<div class = "main">
+
+<div class="header">
+	  <a href="#default" class="logo"> <span><img th:src="@{/resources/img/logo.png}"style="width:155px;height:45px" /></span></a>
+	  <div class="header-right">
+	  <p th:text="Transaction" />
+	  </div>
+	</div>
+
     
 <div class="w3-container">
 	<div class="row">
 		<h2>Account Information</h2>
-		<form th:action="@{/transaction}" method="get">
-		  <label for="cars">Choose a month:</label>
-		  <select id="month" name="month" >
-  		    <option th:each="option : ${options}" th:value="${option.id}" th:text="${option.text}"></option>
-		  </select>
-		  <input type="submit">
-		</form>
  	</div>
   
 	<div class="w3-container">
@@ -42,17 +56,29 @@
 	      <td>Currency</td>
 	      <td>USD</td>
 	    </tr>
-	    <tr>
-	      <td>Period</td>
-	      <td th:text=${period}></td>
-	    </tr>
 	  </table>
 	</div>
+	
+<br>	
+	<div class="img" >
+		<img th:src="@{/resources/img/balance.png}" alt="balance" style="width:300px;height:250px">
+		<div class="topcentered" style="color: #4F4E56">Cash Balance</div>
+		<div class="centered" style="color: #4F4E56; font-size:350%"><p th:text="'$' + ${user.savings}" /></div>
+	</div>
+	
 <hr>
 </div>
     
 <div class="w3-container">
   <h2>Account Statement</h2>
+  	<form th:action="@{/transaction}" method="get">
+		  <label for="cars">Choose a month:</label>
+		  <select id="month" name="month" >
+  		    <option th:each="option : ${options}" th:value="${option.id}" th:text="${option.text}"></option>
+		  </select>
+		  <input type="submit">
+	</form>
+	<b><td th:text=${period}></td></b>
 <hr>
   <table class="w3-table-all w3-hoverable">
     <thead>
@@ -67,7 +93,7 @@
         <td th:text="${transaction.datetime}"></td>
         <td th:text="${transaction.message}"></td>
         <td class="w3-right-align" th:text="${transaction.amountstring}"></td>
-        <td th:text="${transaction.currentbalance}"></td>
+        <td class="w3-right-align" th:text="${transaction.currentbalance}"></td>
       </tr>
     <tr>
       <td></td>
@@ -100,6 +126,7 @@
       <td></td>
     </tr>
   </table>
+</div>
 </div>
 
 </body>
