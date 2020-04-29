@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/alert.css}"/>
+</head>
+<body>
+
+<div class="box">
+
+    <div class="w3-container">
+        <div class="row">
+            <h2>Transfer Confirmation</h2>
+        </div>
+
+        <div class="w3-container">
+            <table class="w3-table-all w3-hoverable">
+                <thead>
+                <td>
+                    FUND TRANSFER - Receipt
+                </td>
+                <td></td>
+                </thead>
+                <tr>
+                    <td>FUND Origin</td>
+                    <td th:text=${transfer.accountNumber}></td>
+                </tr>
+                <tr>
+                    <td>                 </td>
+                    <td>                 </td>
+                </tr>
+                <tr>
+                    <td>Fund Destination</td>
+                    <td th:text=${transfer.destination_id}></td>
+                </tr>
+                <tr>
+                    <td>Recepient Name</td>
+                    <td th:text=${transfer.fullName}></td>
+                </tr>
+                <tr>
+                    <td>Transfer Message</td>
+                    <td th:text=${transfer.message}></td>
+                </tr>
+                <tr>
+                    <td>Fund Amount</td>
+                    <td th:text=${transfer.amountCurr}></td>
+                </tr>
+            </table>
+
+
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

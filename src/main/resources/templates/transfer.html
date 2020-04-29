@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/alert.css}"/>
+</head>
+<body>
+<div class="box">
+
+    <div th:class="${alertClass}" th:if="${message}" >
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        <strong>Danger!</strong><p th:text="${message}"/>
+    </div>
+        <div>
+            <p>
+                FUND TRANSFER
+            </p>
+        </div>
+        <form action="#" th:action="@{/transfer}" th:object="${transfer}" method="post">
+            <p>Fund Origin: <input type="text" disabled th:value="${user.accountNumber}" /></p>
+            <input type="hidden" id="accountNumber" th:field="*{accountNumber}"/>
+            <p>Destination: <input type="number" th:field="*{destination_id}"/></p>
+            <p>Amount: <input type="number" th:field="*{amount}"/></p>
+            <p>Remark: <input type="text" th:field="*{message}" /></p>
+            <button type="submit" style="font-size:100%; letter-spacing: 2px;"> S E N D </button>
+        </form>
+    </div>
+
+</body>
+</html>

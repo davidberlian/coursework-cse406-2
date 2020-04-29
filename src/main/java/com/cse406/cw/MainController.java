@@ -31,7 +31,7 @@ public class MainController {
 		//model.addAttribute("name", name);
 		return "index";
 	}
-	
+
 
 	@GetMapping("/createaccount")
 	public String login(Model model) {
@@ -56,132 +56,49 @@ public class MainController {
 	
 	@GetMapping("/home")
 	public String home(Model model, HttpServletRequest request) {
-		
-		User user = new User();
-		HttpSession newSession = request.getSession(); 
-		System.out.println("SESSION DATA" + newSession.getAttribute("token").toString());
-		user.setUsername(newSession.getAttribute("username").toString());
-		user.setToken(newSession.getAttribute("token").toString());	
-		
-		if(user.checkToken()) {	
+		try {
+			User user = new User();
+			HttpSession newSession = request.getSession();
+			System.out.println("SESSION DATA" + newSession.getAttribute("token").toString());
+			user.setUsername(newSession.getAttribute("username").toString());
+			user.setToken(newSession.getAttribute("token").toString());
 
-	        NumberFormat format = NumberFormat.getCurrencyInstance(Locale.US);
-	        String userBalance = format.format(user.getSavings());
-			model.addAttribute("user", user);
-			model.addAttribute("userBalance", userBalance);
-			return "home";	
-			
-		}else {
-			System.out.println("Failed");	 
-			model.addAttribute("message", "Please Login!");  
-		    model.addAttribute("user", new User());
-			newSession.invalidate();
-			return "login";
-		}
-	}
-	@GetMapping("/transaction")
-	public String transaction(Model model, HttpServletRequest request,@RequestParam(defaultValue = "") String month) {
-				
-		User user = new User();
-		HttpSession newSession = request.getSession(); 
-		System.out.println("SESSION DATA" + newSession.getAttribute("token").toString());
-		user.setUsername(newSession.getAttribute("username").toString());
-		user.setToken(newSession.getAttribute("token").toString());	
-		
-		if(user.checkToken()) {	
-			
-			model.addAttribute("user", user);
+			if (user.checkToken()) {
 
+				NumberFormat format = NumberFormat.getCurrencyInstance(Locale.US);
+				String userBalance = format.format(user.getSavings());
+				model.addAttribute("user", user);
+				model.addAttribute("userBalance", userBalance);
+				return "home";
 
-			
-	        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM");  
-	        LocalDateTime picked = null;
-	        if(month.equals("")) {
-	        	picked = LocalDateTime.now();
-	        }else {	        	
-	        	picked = LocalDateTime.parse(month+"-01T00:00:01");
-	        }
-	        
-
-			Double totalDebit = 0D;
-			Double totalCredit = 0D;
-			Double startingBalance = Transaction.loadTransactionBalance(user.getUsername(), picked.format(dtf));
-			Double currentBalance = startingBalance;
-			
-	        System.out.println("CURRENT BALANCE" + currentBalance);
-	        
-	        ArrayList<String[]> list = null;
-			
-				list = Transaction.loadTransaction(user.getUsername(), picked.format(dtf));
-			
-			ArrayList<Transaction> listOfTransaction= new ArrayList<Transaction>(); 
-	        NumberFormat format = NumberFormat.getCurrencyInstance(Locale.US);
-
-	        ArrayList<Month> listOfMonth = new ArrayList<Month>();
-        	LocalDateTime currentdate = LocalDateTime.now();
-	        for(int i = 3; i > 0; i--) {
-	        	listOfMonth.add(new Month(currentdate));
-	        	currentdate = currentdate.minusMonths(1);
-	        }
-	        
-	        model.addAttribute("options",listOfMonth);
-	        
-	        int maxDay = picked.getMonth().maxLength();
-	        System.out.println("DAY OF MONTH + +"+maxDay);
-	        dtf = DateTimeFormatter.ofPattern("dd MMMM yyyy"); 
-	        LocalDateTime begin = LocalDateTime.of(picked.getYear(), picked.getMonth(),  1,0,0,0);
-	        LocalDateTime end = LocalDateTime.of(picked.getYear(), picked.getMonth(),  maxDay,0,0,0);
-			model.addAttribute("period", begin.format(dtf)+" to "+end.format(dtf));
-	        
-			for(int i = 0; i<list.size(); i++) {
-				System.out.println("Success+"+i);
-				listOfTransaction.add(new Transaction(list.get(i)[2],list.get(i)[0],list.get(i)[1]));
-
-		        System.out.println("CURRENT BALANCE BEFORE" + currentBalance);
-				if(listOfTransaction.get(i).getCreditdebit().contentEquals("CREDIT")) {
-					totalCredit += listOfTransaction.get(i).getAmount();
-				}else {
-					totalDebit += listOfTransaction.get(i).getAmount();
-				}
-				currentBalance += listOfTransaction.get(i).getAmount();
-				listOfTransaction.get(i).setCurrentbalance(format.format(currentBalance));
-		        System.out.println("CURRENT BALANCE" + currentBalance);
+			} else {
+				System.out.println("Failed");
+				model.addAttribute("message", "Please Login!");
+				model.addAttribute("user", new User());
+				newSession.invalidate();
+				return "login";
 			}
-			
-			model.addAttribute("transactions",listOfTransaction);
-
-			model.addAttribute("startingBalance",format.format(startingBalance));
-			model.addAttribute("totalDebit",format.format(totalDebit));
-			model.addAttribute("totalCredit",format.format(totalCredit));
-			model.addAttribute("currentBalance",format.format(currentBalance));
-			
-			return "transaction";	
-			
-		}else {
-			System.out.println("Failed");	 
-			model.addAttribute("message", "Please Login!");  
-		    model.addAttribute("user", new User());
-			newSession.invalidate();
-			return "login";
+		}catch(Exception e){
+			return "redirect:/login";
 		}
 	}
 	@GetMapping("/setting")
 	public String setting(Model model, HttpServletRequest request) { 
-		
+
 		User user = new User();
-		HttpSession newSession = request.getSession(); 
+		HttpSession newSession = request.getSession();
 		System.out.println("SESSION DATA" + newSession.getAttribute("token").toString());
 		user.setUsername(newSession.getAttribute("username").toString());
-		user.setToken(newSession.getAttribute("token").toString());	
-		
-		if(user.checkToken()) {	
-			
+		user.setToken(newSession.getAttribute("token").toString());
+
+		if(user.checkToken()) {
+
 			model.addAttribute("user", user);
-			return "setting";	
-			
+			return "setting";
+
 		}else {
-			System.out.println("Failed");	 
-			model.addAttribute("message", "Please Login!");  
+			System.out.println("Failed");
+			model.addAttribute("message", "Please Login!");
 		    model.addAttribute("user", new User());
 			newSession.invalidate();
 			return "login";
