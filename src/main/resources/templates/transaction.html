@@ -9,7 +9,7 @@
 <title>Account Transaction</title>
 <script src="https://kit.fontawesome.com/6e68db03e6.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" th:href="@{/resources/css/transaction.css}"/>
-
+<link rel="stylesheet" type="text/css" th:href="@{/resources/css/sidebar.css}"/>
 
 <title>Transaction</title>
 
@@ -18,10 +18,9 @@
 
 <div class="sidebar">
 <br>
-  <a href="home"><i class="fa fa-fw fa-home"></i> Home</a><br>
-  <a href="#services"><i class="fa fa-fw fa-wrench"></i> Setting</a><br>
-  <a href="#clients"><i class="fa fa-fw fa-user"></i> Personal Info</a><br>
-  <a href="#contact"><i class="fa fa-fw fa-envelope"></i> Contact Us</a><br>
+  <a th:href="@{/home}"><i class="fa fa-fw fa-home"></i> Home</a><br>
+  <a th:href="@{/setting}"><i class="fa fa-fw fa-wrench"></i> Setting</a ><br>
+  <a th:href="@{/personal}"><i class="fa fa-fw fa-user"></i> Personal Info</a><br>
 </div>
 
 <div class = "main">
@@ -61,11 +60,6 @@
 	</div>
 	
 <br>	
-	<div class="img" >
-		<img th:src="@{/resources/img/balance.png}" alt="balance" style="width:300px;height:250px">
-		<div class="topcentered" style="color: #4F4E56">Cash Balance</div>
-		<div class="centered" style="color: #4F4E56; font-size:350%"><p th:text="'$' + ${user.savings}" /></div>
-	</div>
 	
 <hr>
 </div>
@@ -81,28 +75,10 @@
 	</form>
 	<b><td th:text=${period}></td></b>
 <hr>
+Summary
   <table class="w3-table-all w3-hoverable">
     <thead>
-      <tr class="w3-light-grey">
-        <th>Date time</th>
-        <th>Message</th>
-        <th>Amount</th>
-        <th>Current Balance</th>
-      </tr>
-    </thead>
-       <tr th:each="transaction : ${transactions}">
-        <td th:text="${transaction.datetime}"></td>
-        <td th:text="${transaction.message}"></td>
-        <td class="w3-right-align" th:text="${transaction.amountstring}"></td>
-        <td class="w3-right-align" th:text="${transaction.currentbalance}"></td>
-      </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
+      <tr>
       <td>Starting Balance</td>
       <td>:</td>
       <td class="w3-right-align" th:text="${startingBalance}"></td>
@@ -126,9 +102,36 @@
       <td class="w3-right-align" th:text="${currentBalance}"></td>
       <td></td>
     </tr>
+     
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    </thead>
+    </table>
+ <br> 
+ Transaction  
+  <table class="w3-table-all w3-hoverable">
+     <thead>
+      <tr class="w3-light-grey">
+        <th>Date time</th>
+        <th>Message</th>
+        <th>Amount</th>
+        <th>Current Balance</th>
+      </tr>
+    </thead>
+       <tr th:each="transaction : ${transactions}">
+        <td th:text="${transaction.datetime}"></td>
+        <td th:text="${transaction.message}"></td>
+        <td class="w3-right-align" th:text="${transaction.amountstring}"></td>
+        <td class="w3-right-align" th:text="${transaction.currentbalance}"></td>
+      </tr>
   </table>
 </div>
 </div>
+
 
 </body>
 </html>

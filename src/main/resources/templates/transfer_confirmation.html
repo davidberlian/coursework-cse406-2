@@ -2,12 +2,23 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Transfer Confirmation</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" type="text/css" th:href="@{/resources/css/alert.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/sidebar.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/transfer.css}"/>
 </head>
 <body>
 
+<div class="header">
+	  <a href="#default" class="logo"> <span><img th:src="@{/resources/img/logo.png}"style="width:155px;height:45px" /></span></a>
+<div class="header-right">
+	  <p th:text="Transfer" />
+	  </div>
+</div>
+<div class="header" style="background: rgb(24,187,217); background: linear-gradient(90deg, rgba(24,187,217,1) 0%, rgba(76,184,243,1) 59%, rgba(201,162,242,1) 100%)"> </div>
+
+<div class="container" style="background-color:white"> 
 <div class="box">
 
     <div th:class="${alertClass}" th:if="${message}" >
@@ -19,41 +30,39 @@
             <h2>Transfer Confirmation</h2>
         </div>
 
-        <div class="w3-container">
-            <table class="w3-table-all w3-hoverable">
+        <div class="box" style="border: 3px solid black; width: 70%;">
+            <table class="table">
                 <thead>
-                <td>
-                    FUND TRANSFER - CONFIMATION
-                </td>
                 <td></td>
                 </thead>
                 <tr>
-                    <td>FUND Origin</td>
+                    <td>From Account</td>
                     <td th:text=${transfer.accountNumber}></td>
                 </tr>
+                
+                <tr><td></td><td></td></tr>
                 <tr>
-                    <td>                 </td>
-                    <td>                 </td>
-                </tr>
-                <tr>
-                    <td>Fund Destination</td>
+                    <td>To Account</td>
                     <td th:text=${transfer.destination_id}></td>
                 </tr>
                 <tr>
-                    <td>Recepient Name</td>
+                    <td></td>
                     <td th:text=${transfer.fullName}></td>
                 </tr>
                 <tr>
-                    <td>Transfer Message</td>
-                    <td th:text=${transfer.message}></td>
-                </tr>
-                <tr>
-                    <td>Fund Amount</td>
+                    <td>Amount</td>
                     <td th:text=${transfer.amountCurr}></td>
                 </tr>
+                
+                <tr><td></td><td></td></tr>
+                <tr>
+                    <td>Remark</td>
+                    <td th:text=${transfer.message}></td>
+                </tr>
+                
             </table>
         </div>
-
+        
         <div class="box">
             <form action="#" th:action="@{/send_transfer}" th:object="${transfer}" method="post">
                 <p><form type="hidden" id="accountNumber" th:field="*{accountNumber}" /></p>
@@ -61,11 +70,15 @@
                 <p><input type="hidden" id="amount" th:field="*{amount}"/></p>
                 <p><input type="hidden" id="message" th:field="*{message}"/></p>
                 <input type="hidden" id="id" name="id" th:value="*{id}"/>
-                <button type="submit" style="font-size:100%; letter-spacing: 2px;"> CONFIRM </button>
+                <button type="submit" style="font-size:100%; letter-spacing: 2px; background: rgb(24,187,217); background: linear-gradient(90deg, rgba(24,187,217,1) 0%, rgba(76,184,243,1) 59%, rgba(201,162,242,1) 100%)">
+                 CONFIRM </button>
             </form>
-
-        </div>
-
+            <form action="#" th:action="@{/transfer}">
+              <button type="submit" style="font-size:100%; letter-spacing: 2px;">BACK</button><br>
+            </form>
+       	 </div>
+		</div>
+	</div>
 </div>
 
 </body>

@@ -22,10 +22,11 @@
 	<div class="box">
     	<form action="#" th:action="@{/login}" th:object="${user}" method="post">
 
-			<div th:class="${alertClass}" th:if="${message}" >
+			<div class="alert" th:if="${message}" >
 				<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-				<strong>Danger!</strong><p th:text="${message}"/>
+				<p th:text="${message}"/>
 			</div>
+			<br>
 						<i class="fas fa-user"></i>
 								<input type="text" placeholder="Enter User name" th:field="*{username}" />
 						<i class="fas fa-lock"></i>	
