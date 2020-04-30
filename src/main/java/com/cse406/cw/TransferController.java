@@ -111,6 +111,11 @@ public class TransferController {
 
                 if(transfer.checkBalance()){
                     System.out.println("BALANCE SUFFICIENT");
+                    if(transfer.getId() > 0){
+                        transfer.acceptRequest();
+                    }else{
+                        System.out.println("REQUEST ID NOT DETECTED");
+                    }
                     if(transfer.send()){
                         model.addAttribute("transfer", transfer);
                         model.addAttribute("user", user);

@@ -39,6 +39,17 @@ public class Transfer {
     private String name2;
     private String time;
     private String status;
+
+    public String toString2(){
+        return this.id+","+
+                this.receiver+","+
+                this.requester+","+
+                this.name1+","+
+                this.name2+","+
+                this.time+","+
+                this.status+",";
+    }
+
     public String getReceiver() {
         return receiver;
     }
@@ -89,7 +100,7 @@ public class Transfer {
     }
 
 
-    public Transfer(String receiver, String requester, String name1,String message, String name2,
+    public Transfer(String receiver, String requester, String name1,String name2, String message,
                     String amount, String status,String time, int id){
         this.receiver = receiver;
         this.requester = requester;
@@ -228,6 +239,23 @@ public class Transfer {
             return false;
         }
     }
+
+    public boolean createNewRequest(){
+        try{
+            DB_Connection conn = new DB_Connection();
+            String query = "INSERT INTO transaction_request (savings_id, destination_id, transaction_amount, transaction_message) VALUES "+
+                                "('"+this.requester+"','"+this.receiver+"','"+this.amount+"','"+this.message+"')";
+            System.out.println(query);
+
+            Boolean Response= conn.write_query(query);
+            if(Response)return true;
+            return false;
+        }catch (Exception e){
+            e.getMessage();
+            return false;
+        }
+    }
+
     public boolean send(){
         try {
             //INSERT INTO `transaction`(`id`, `savings_id`, `transaction_id`, `transaction_message`, `transaction_amount`,
@@ -258,6 +286,51 @@ public class Transfer {
                         }
                     }
                 }
+            }
+            return false;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public Boolean rejectRequest(){
+        try {
+            //INSERT INTO `transaction`(`id`, `savings_id`, `transaction_id`, `transaction_message`, `transaction_amount`,
+            // `transaction_time`) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5],[value-6])
+
+            DB_Connection conn = new DB_Connection();
+            String query =
+                    "UPDATE transaction_request SET status = 2 "+
+                            "WHERE id = "+this.id;
+
+            System.out.println(query);
+
+            Boolean Response= conn.write_query(query);
+            if(Response) {
+                return true;
+            }
+            return false;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public Boolean acceptRequest(){
+        try {
+            //INSERT INTO `transaction`(`id`, `savings_id`, `transaction_id`, `transaction_message`, `transaction_amount`,
+            // `transaction_time`) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5],[value-6])
+
+            DB_Connection conn = new DB_Connection();
+            String query =
+                    "UPDATE transaction_request SET status = 1 "+
+                            "WHERE id = "+this.id;
+
+            System.out.println(query);
+
+            Boolean Response= conn.write_query(query);
+            if(Response) {
+                return true;
             }
             return false;
         } catch (Exception e) {
