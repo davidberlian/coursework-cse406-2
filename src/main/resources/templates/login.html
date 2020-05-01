@@ -1,56 +1,73 @@
 <!DOCTYPE HTML>
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
-    <title>Login</title>
-	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/login.css}"/>
-	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/alert.css}"/>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <script src="https://kit.fontawesome.com/6e68db03e6.js" crossorigin="anonymous"></script>
+<title>Login</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/resources/css/login.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/resources/css/alert.css}" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script src="https://kit.fontawesome.com/6e68db03e6.js"
+	crossorigin="anonymous"></script>
 </head>
 
 <body>
 
-<center>
-<h2 style="font-size:10%;"> <img th:src="@{/resources/img/logo.png}" style="width:150px;height:45px"/> </h2> 
-</center>
-
-<div class="container" style="background-color:white"> 
- <center>
-		<p style="font-size:250%;  letter-spacing: 4px; color: royalblue">Welcome back!</p>
-		<p style="font-size:95%;  letter-spacing: 2px";>Member Login</p><br>
+	<center>
+		<h2 style="font-size: 10%;">
+			<img th:src="@{/resources/img/logo.png}"
+				style="width: 150px; height: 45px" />
+		</h2>
 	</center>
-	<div class="box">
-    	<form action="#" th:action="@{/login}" th:object="${user}" method="post">
 
-			<div class="alert" th:if="${message}" >
-				<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-				<p th:text="${message}"/>
-			</div>
-			<br>
-						<i class="fas fa-user"></i>
-								<input type="text" placeholder="Enter User name" th:field="*{username}" />
-						<i class="fas fa-lock"></i>	
-								<input type="password"placeholder="Enter Password" th:field="*{password}" />
-								
-						<p style="font-size:60%"> <span class="psw" style= "color: royalblue"> <a href="#">Forgot Password</a></span></p>		
-						<button type="submit" style="font-size:80%"><b>L o g i n</b></button> 
-						
-						<label style="font-size:60%">
-			     			 <input type="checkbox" checked="checked" name="remember"> Remember me
-						</label>	
-		</form>
+	<div class="container" style="background-color: white">
 		<center>
-			<form action="#" th:action="@{/signup}">
-			<button type="submit" style="font-size:80%; width: 50%; background: rgb(24,187,217); background: linear-gradient(90deg, rgba(24,187,217,1) 0%, rgba(76,184,243,1) 59%, rgba(201,162,242,1) 100%);">
-			<b>New User? Join us now</b></button> 
-			</form>
+			<p style="font-size: 250%; letter-spacing: 4px; color: royalblue">Welcome
+				back!</p>
+			<p style="font-size: 95%; letter-spacing: 2px";>Member Login</p>
+			<br>
 		</center>
-		
-	</div>
-</div>
+		<div class="box">
+			<form action="#" th:action="@{/login}" th:object="${user}"
+				method="post">
 
-<br>
-<div class="container" style = "background-color: #4CB8F3"> </div> <br>
-    
+				<div class="alert" th:if="${message}">
+					<span class="closebtn"
+						onclick="this.parentElement.style.display='none';">&times;</span>
+					<p th:text="${message}" />
+				</div>
+				<br> <i class="fas fa-user"></i> <input type="text"
+					placeholder="Enter User name" th:field="*{username}" /> <i
+					class="fas fa-lock"></i> <input type="password"
+					placeholder="Enter Password" th:field="*{password}" />
+
+				<p style="font-size: 60%">
+					<span class="psw" style="color: royalblue"> <a href="#">Forgot
+							Password</a></span>
+				</p>
+				<button type="submit" style="font-size: 80%">
+					<b>L o g i n</b>
+				</button>
+
+				<label style="font-size: 60%"> <input type="checkbox"
+					checked="checked" name="remember"> Remember me
+				</label>
+			</form>
+			<center>
+				<form action="#" th:action="@{/signup}">
+					<button type="submit"
+						style="font-size: 80%; width: 50%; background: rgb(24, 187, 217); background: linear-gradient(90deg, rgba(24, 187, 217, 1) 0%, rgba(76, 184, 243, 1) 59%, rgba(201, 162, 242, 1) 100%);">
+						<b>New User? Join us now</b>
+					</button>
+				</form>
+			</center>
+
+		</div>
+	</div>
+
+	<br>
+	<div class="container" style="background-color: #4CB8F3"></div>
+	<br>
+
 </body>
 </html>

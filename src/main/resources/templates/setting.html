@@ -3,51 +3,86 @@
 <head>
 <meta charset="UTF-8">
 <title>Home: Internet Banking</title>
-<script src="https://kit.fontawesome.com/6e68db03e6.js" crossorigin="anonymous"></script>
-<link rel="stylesheet" type="text/css" th:href="@{/resources/css/home.css}"/>
+<script src="https://kit.fontawesome.com/6e68db03e6.js"
+	crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/resources/css/home.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/resources/css/sidebar.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/resources/css/insideApplication.css}" />
 </head>
 
-<body> 
+<body>
 
-<div class="sidebar">
-<br>
-  <a th:href="@{/home}"><i class="fa fa-fw fa-home"></i> Home</a><br>
-  <a th:href="@{/setting}"><i class="fa fa-fw fa-wrench"></i> Setting</a ><br>
-  <a th:href="@{/personal}"><i class="fa fa-fw fa-user"></i> Personal Info</a><br>
-</div>
-
-<div class = "main">
-	<div class="header">
-	  <a href="#default" class="logo"> <span><img th:src="@{/resources/img/logo.png}"style="width:155px;height:45px" /></span></a>
-	  <div class="header-right">
-	  	<form action="#" th:action="@{/logout}">
-	    <a>  <p style="font-size:100%; letter-spacing: 2px"> <p th:text="'Hello, ' + ${user.username} + '!'" /> </p></a>
-			<button type="submit" style = "border: 1pxl; background: white; color: #FC5A5A; font-size:250%">
-			<i class="fas fa-sign-out-alt"></i></button>
-		</form>
-	  </div>
+	<div class="sidebar">
+		<br> <a th:href="@{/home}"><i class="fa fa-fw fa-home"></i>
+			Home</a><br> <a th:href="@{/setting}"><i
+			class="fa fa-fw fa-wrench"></i> Setting</a><br> <a
+			th:href="@{/personal}"><i class="fa fa-fw fa-user"></i> Personal
+			Info</a><br>
 	</div>
-	
-	<div class="header" style = "background-color: #4CB8F3"> </div> <br>
-	
-	<div class="img" >
-		<img th:src="@{/resources/img/balance.png}" alt="balance" style="width:300px;height:250px">
-		<div class="topcentered" style="color: #4F4E56">Cash Balance</div>
-		<div class="centered" style="color: #4F4E56; font-size:350%"><p th:text="'$' + ${user.savings}" /></div>
+
+	<div class="main">
+		<div class="header">
+			<a href="#default" class="logo"> <span><img
+					th:src="@{/resources/img/logo.png}"
+					style="width: 155px; height: 45px" /></span></a>
+			<div class="header-right">
+				<form action="#" th:action="@{/logout}">
+					<a>
+						<p style="font-size: 100%; letter-spacing: 2px">
+						<p th:text="'Hello, ' + ${user.username} + '!'" />
+						</p>
+					</a>
+					<button type="submit"
+						style="border: 1pxl; background: white; color: #FC5A5A; font-size: 250%">
+						<i class="fas fa-sign-out-alt"></i>
+					</button>
+				</form>
+			</div>
+		</div>
+
+		<div class="header" style="background-color: #4CB8F3"></div>
+		<br>
+
+		<div class="img">
+			<img th:src="@{/resources/img/balance.png}" alt="balance"
+				style="width: 300px; height: 250px">
+			<div class="topcentered" style="color: #4F4E56">Cash Balance</div>
+			<div class="centered" style="color: #4F4E56; font-size: 350%">
+				<p th:text="'$' + ${user.savings}" />
+			</div>
+		</div>
+
+
+		<br>
+
+		<div class="container">
+		
+			<div> 
+				
+				
+				<p th:text="'Current Name:  ' + ${user.username}" />
+				<br> 
+				<p> Would you like to change your name? <p/>
+	  				<label for="fname">First name:</label><br>
+	 				<input type="text" id="fname" name="fname" value="Enter new name"><br> 
+	 			<br> 	
+	 			<p> Language: English </p> 	
+	  			
+	  			<br>
+	  			 <form action="">
+	  				<p> Would you like to delete you account?  yes or no?</p> 
+				</form> 
+
+			</div>	
+		</div>
+
+
+
 	</div>
-	
-	 
-<br>
 
-<div >
-<p> this is the setting page</p> 
-
-</div>
-
-
-
-</div>
-	
 
 </body>
 </html>

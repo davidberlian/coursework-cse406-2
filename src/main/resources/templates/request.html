@@ -2,147 +2,171 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/alert.css}"/>
-    <meta charset="UTF-8">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" type="text/css"
+	th:href="@{/resources/css/alert.css}" />
+<meta charset="UTF-8">
 
-    <title>Account Transaction</title>
-    <script src="https://kit.fontawesome.com/6e68db03e6.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/transaction.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/request.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/alert.css}"/>
+<title>Account Transaction</title>
+<script src="https://kit.fontawesome.com/6e68db03e6.js"
+	crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/resources/css/transaction.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/resources/css/request.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/resources/css/alert.css}" />
 
 
-    <title>Transaction</title>
+<title>Transaction</title>
 
 </head>
 <body>
 
-<div class="sidebar">
-    <br>
-    <a href="home"><i class="fa fa-fw fa-home"></i> Home</a><br>
-    <a href="#services"><i class="fa fa-fw fa-wrench"></i> Setting</a><br>
-    <a href="#clients"><i class="fa fa-fw fa-user"></i> Personal Info</a><br>
-    <a href="#contact"><i class="fa fa-fw fa-envelope"></i> Contact Us</a><br>
-</div>
+	<div class="sidebar">
+		<br> <a href="home"><i class="fa fa-fw fa-home"></i> Home</a><br>
+		<a href="#services"><i class="fa fa-fw fa-wrench"></i> Setting</a><br>
+		<a href="#clients"><i class="fa fa-fw fa-user"></i> Personal Info</a><br>
+		<a href="#contact"><i class="fa fa-fw fa-envelope"></i> Contact Us</a><br>
+	</div>
 
-<div class = "main">
+	<div class="main">
 
-    <div class="header">
-        <a href="#default" class="logo"> <span><img th:src="@{/resources/img/logo.png}"style="width:155px;height:45px" /></span></a>
-        <div class="header-right">
-            <p th:text="Transaction" />
-        </div>
-    </div>
-
-
-    <div class="w3-container">
-        <div class="row">
-            <h2>Request Information</h2>
-        </div>
-
-        <div class="w3-container">
-
-            <table class="w3-table-all w3-hoverable">
-                <thead>
-
-                </thead>
-                <tr>
-                    <td>Account Number</td>
-                    <td th:text=${user.accountNumber}></td>
-                </tr>
-                <tr>
-                    <td>Full Name</td>
-                    <td th:text=${user.fullName}></td>
-                </tr>
-                <tr>
-                    <td>Currency</td>
-                    <td>USD</td>
-                </tr>
-            </table>
-        </div>
-
-        <br>
-        <div class="img" >
-            <img th:src="@{/resources/img/balance.png}" alt="balance" style="width:300px;height:250px">
-            <div class="topcentered" style="color: #4F4E56">Cash Balance</div>
-            <div class="centered" style="color: #4F4E56; font-size:350%"><p th:text="'$' + ${user.savings}" /></div>
-        </div>
-
-        <hr>
-    </div>
+		<div class="header">
+			<a href="#default" class="logo"> <span><img
+					th:src="@{/resources/img/logo.png}"
+					style="width: 155px; height: 45px" /></span></a>
+			<div class="header-right">
+				<p th:text="Transaction" />
+			</div>
+		</div>
 
 
-    <div th:class="${alertClass}" th:if="${message}" >
-        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-        <strong>Danger!</strong><p th:text="${message}"/>
-    </div>
+		<div class="w3-container">
+			<div class="row">
+				<h2>Request Information</h2>
+			</div>
 
-    <div class="w3-bar w3-black">
-        <button class="w3-bar-item w3-button" onclick="openCity('newRequest')">Request Form</button>
-        <button class="w3-bar-item w3-button" onclick="openCity('listOfRequest')">List Of Request</button>
-    </div>
+			<div class="w3-container">
 
-    <div  id="newRequest"  class="w3-container city" >
-        <form action="#" th:action="@{/request}" th:object="${newTransferRequest}" method="get">
-            <input type="hidden" id="accountNumber" th:field="*{accountNumber}"/>
-            <p>Request TO: <input type="number" th:field="*{destination_id}"/></p>
-            <p>Amount: <input type="number" th:field="*{amount}"/></p>
-            <p>Message: <input type="text" th:field="*{message}" /></p>
-            <button type="submit" style="font-size:100%; letter-spacing: 2px;"> REQUEST </button>
-        </form>
-    </div>
-    <div id="listOfRequest" class="w3-container city" style="display:none">
-        <div class="w3-container">
-        <table class="w3-table-all w3-hoverable">
-            <thead>
-            <tr class="w3-light-grey">
-                <th>time</th>
-                <th>detail</th>
-                <th>message</th>
-                <th>Amount</th>
-                <th>status</th>
-            </tr>
-            </thead>
-            <tr th:each="transfer : ${listOfRequest}">
-                <td th:text="${transfer.time}"></td>
-                <td th:text="${transfer.name1}"></td>
-                <td th:text="${transfer.message}"></td>
-                <td th:text="${transfer.amountCurr}"></td>
-                <td th:if="${transfer.status == 'option'}" >
-                    <form action="#" th:action="@{/request}" th:object="${transfer}"  method="post">
-                        <input type="hidden" id="response" name="response" value="send"/>
-                        <input type="hidden" id="id" name="id" th:value="*{id}"/>
-                        <input type="hidden" id="receiver" name="receiver" th:value="*{receiver}"/>
-                        <input type="hidden" id="requester" name="requester" th:value="*{requester}"/>
-                        <input type="hidden" id="name1" name="name1" th:value="*{name1}"/>
-                        <input type="hidden" id="name2" name="name2" th:value="*{name2}"/>
-                        <input type="hidden" id="time" name="time" th:value="*{time}"/>
-                        <input type="hidden" id="amount" name="amount" th:value="*{amount}"/>
-                        <button type="submit" class="buttona"> S E N D </button>
-                    </form>
-                    <form action="#" th:action="@{/request}" th:object="${transfer}"  method="post">
-                        <input type="hidden" id="response" name="response" value="reject"/>
-                        <input type="hidden" id="id" name="id" th:value="*{id}"/>
-                        <input type="hidden" id="receiver" name="receiver" th:value="*{receiver}"/>
-                        <input type="hidden" id="requester" name="requester" th:value="*{requester}"/>
-                        <input type="hidden" id="name1" name="name1" th:value="*{name1}"/>
-                        <input type="hidden" id="name2" name="name2" th:value="*{name2}"/>
-                        <input type="hidden" id="time" name="time" th:value="*{time}"/>
-                        <input type="hidden" id="amount" name="amount" th:value="*{amount}"/>
-                        <button type="submit" class="buttonr"> R E J E C T </button>
-                    </form>
-                </td>
-                <td th:if="${transfer.status != 'option'}" th:text="${transfer.status}">
+				<table class="w3-table-all w3-hoverable">
+					<thead>
 
-                </td>
-            </tr>
-        </table>
+					</thead>
+					<tr>
+						<td>Account Number</td>
+						<td th:text=${user.accountNumber}></td>
+					</tr>
+					<tr>
+						<td>Full Name</td>
+						<td th:text=${user.fullName}></td>
+					</tr>
+					<tr>
+						<td>Currency</td>
+						<td>USD</td>
+					</tr>
+				</table>
+			</div>
 
-        </div>
-    </div>
-</div>
+			<br>
+			<div class="img">
+				<img th:src="@{/resources/img/balance.png}" alt="balance"
+					style="width: 300px; height: 250px">
+				<div class="topcentered" style="color: #4F4E56">Cash Balance</div>
+				<div class="centered" style="color: #4F4E56; font-size: 350%">
+					<p th:text="'$' + ${user.savings}" />
+				</div>
+			</div>
 
-<script type="text/javascript" th:src="@{/resources/js/request.js}"></script>
+			<hr>
+		</div>
+
+
+		<div th:class="${alertClass}" th:if="${message}">
+			<span class="closebtn"
+				onclick="this.parentElement.style.display='none';">&times;</span> <strong>Danger!</strong>
+			<p th:text="${message}" />
+		</div>
+
+		<div class="w3-bar w3-black">
+			<button class="w3-bar-item w3-button"
+				onclick="openCity('newRequest')">Request Form</button>
+			<button class="w3-bar-item w3-button"
+				onclick="openCity('listOfRequest')">List Of Request</button>
+		</div>
+
+		<div id="newRequest" class="w3-container city">
+			<form action="#" th:action="@{/request}"
+				th:object="${newTransferRequest}" method="get">
+				<input type="hidden" id="accountNumber" th:field="*{accountNumber}" />
+				<p>
+					Request TO: <input type="number" th:field="*{destination_id}" />
+				</p>
+				<p>
+					Amount: <input type="number" th:field="*{amount}" />
+				</p>
+				<p>
+					Message: <input type="text" th:field="*{message}" />
+				</p>
+				<button type="submit" style="font-size: 100%; letter-spacing: 2px;">
+					REQUEST</button>
+			</form>
+		</div>
+		<div id="listOfRequest" class="w3-container city"
+			style="display: none">
+			<div class="w3-container">
+				<table class="w3-table-all w3-hoverable">
+					<thead>
+						<tr class="w3-light-grey">
+							<th>time</th>
+							<th>detail</th>
+							<th>message</th>
+							<th>Amount</th>
+							<th>status</th>
+						</tr>
+					</thead>
+					<tr th:each="transfer : ${listOfRequest}">
+						<td th:text="${transfer.time}"></td>
+						<td th:text="${transfer.name1}"></td>
+						<td th:text="${transfer.message}"></td>
+						<td th:text="${transfer.amountCurr}"></td>
+						<td th:if="${transfer.status == 'option'}">
+							<form action="#" th:action="@{/request}" th:object="${transfer}"
+								method="post">
+								<input type="hidden" id="response" name="response" value="send" />
+								<input type="hidden" id="id" name="id" th:value="*{id}" /> <input
+									type="hidden" id="receiver" name="receiver"
+									th:value="*{receiver}" /> <input type="hidden" id="requester"
+									name="requester" th:value="*{requester}" /> <input
+									type="hidden" id="name1" name="name1" th:value="*{name1}" /> <input
+									type="hidden" id="name2" name="name2" th:value="*{name2}" /> <input
+									type="hidden" id="time" name="time" th:value="*{time}" /> <input
+									type="hidden" id="amount" name="amount" th:value="*{amount}" />
+								<button type="submit" class="buttona">S E N D</button>
+							</form>
+							<form action="#" th:action="@{/request}" th:object="${transfer}"
+								method="post">
+								<input type="hidden" id="response" name="response"
+									value="reject" /> <input type="hidden" id="id" name="id"
+									th:value="*{id}" /> <input type="hidden" id="receiver"
+									name="receiver" th:value="*{receiver}" /> <input type="hidden"
+									id="requester" name="requester" th:value="*{requester}" /> <input
+									type="hidden" id="name1" name="name1" th:value="*{name1}" /> <input
+									type="hidden" id="name2" name="name2" th:value="*{name2}" /> <input
+									type="hidden" id="time" name="time" th:value="*{time}" /> <input
+									type="hidden" id="amount" name="amount" th:value="*{amount}" />
+								<button type="submit" class="buttonr">R E J E C T</button>
+							</form>
+						</td>
+						<td th:if="${transfer.status != 'option'}"
+							th:text="${transfer.status}"></td>
+					</tr>
+				</table>
+
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" th:src="@{/resources/js/request.js}"></script>
 </body>
 </html>

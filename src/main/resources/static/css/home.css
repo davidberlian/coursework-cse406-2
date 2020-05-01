@@ -1,84 +1,81 @@
 body {
-  font-family: Avenir;
+	font-family: Avenir;
 }
 
 .header {
-  overflow: hidden;
-  background-color: white;
-  padding: 2px;  
+	overflow: hidden;
+	background-color: white;
+	padding: 2px;
 }
 
 .header a {
-  float: left;
-  color: black;
-  text-align: center;
-  padding: 12px;
-  text-decoration: none;
-  font-size: 18px;
-  line-height: 25px;
-  border-radius: 4px;
+	float: left;
+	color: black;
+	text-align: center;
+	padding: 12px;
+	text-decoration: none;
+	font-size: 18px;
+	line-height: 25px;
+	border-radius: 4px;
 }
 
 .header a:hover {
- opacity: 0.8;
+	opacity: 0.8;
 }
 
 .header-right {
-  float: right;
+	float: right;
 }
 
 .btn-group button {
-  color: white; 
-  padding: 10px 24px; 
-  cursor: pointer;
-  float: left; 
+	color: white;
+	padding: 10px 24px;
+	cursor: pointer;
+	float: left;
 }
 
-
 button {
-  color: white;
-  padding: 14px 20px;
-  margin: 5px;
-  border: none;
-  cursor: pointer;
-  font-size: 70%;
-  display:inline-block;
-  text-align: center;
-  background: rgb(24,187,217);
-  background: linear-gradient(90deg, rgba(24,187,217,1) 0%, rgba(76,184,243,1) 59%, rgba(201,162,242,1) 100%);
-  width:31%; 
-  border-radius: 16px;
+	color: white;
+	padding: 14px 20px;
+	margin: 5px;
+	border: none;
+	cursor: pointer;
+	font-size: 70%;
+	display: inline-block;
+	text-align: center;
+	background: rgb(24, 187, 217);
+	background: linear-gradient(90deg, rgba(24, 187, 217, 1) 0%,
+		rgba(76, 184, 243, 1) 59%, rgba(201, 162, 242, 1) 100%);
+	width: 31%;
+	border-radius: 16px;
 }
 
 button:hover {
-  opacity: 0.8;
+	opacity: 0.8;
 }
 
-
 .btn-group:after {
-  content: "";
-  clear: both;
-  display: table;
+	content: "";
+	clear: both;
+	display: table;
 }
 
 .img {
- position: relative;
- text-align: center;
- color: white;
+	position: relative;
+	text-align: center;
+	color: white;
 }
 
 .topcentered {
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+	position: absolute;
+	top: 30%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
 .centered {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
-
-

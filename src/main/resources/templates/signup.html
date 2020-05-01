@@ -1,41 +1,60 @@
 <!DOCTYPE HTML>
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
-    <title>Sign up</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/signup.css}"/>
-	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/alert.css}"/>
+<title>Sign up</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/resources/css/signup.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/resources/css/alert.css}" />
 </head>
 <body>
 
-<div class="header">
-	  <a href="#" class="logo"> <span><img th:src="@{/resources/img/logo.png}" style="width:150px;height:45px" /></span></a>
-	<div class="header-right">
-	  <a href="login"  style = "background-color: #3C59D5; color : white">Sign in</a>
+	<div class="header">
+		<a href="#" class="logo"> <span><img
+				th:src="@{/resources/img/logo.png}"
+				style="width: 150px; height: 45px" /></span></a>
+		<div class="header-right">
+			<a href="login" style="background-color: #3C59D5; color: white">Sign
+				in</a>
+		</div>
 	</div>
-</div>
 
 	<center>
 		<h1>Join Us</h1>
 	</center>
-    
-	<div class="box">
-		<div th:if="${message}" th:text="${message}" th:class="${'alert ' + alertClass}"></div>
-		<form action="#" th:action="@{/signup}" th:object="${user}" method="post">
-		    	<p>Username: <input type="text" th:field="*{username}" /></p>
-		    	<p>Saving Number: <input type="text" th:field="*{savings_id}" /></p>
-		    	<p>Date of Birth: <input type="date" th:field="*{dob}" /></p>
-		        <p>Password: <input type="password" th:field="*{password}" /></p>
-		        <p>Repeat your password: <input type="password" th:field="*{password2}" /></p>
-				<button type="submit" style="font-size:100%; letter-spacing: 2px;"> Sign Up </button>
-   		 </form>
-	</div>    
-	
-	<br><br>  
 
-<div class="header" style = "background: rgb(24,187,217);
-background: linear-gradient(90deg, rgba(24,187,217,1) 0%, rgba(76,184,243,1) 59%, rgba(201,162,242,1) 100%);"></div>
- 
-    
+	<div class="box">
+		<div th:if="${message}" th:text="${message}"
+			th:class="${'alert ' + alertClass}"></div>
+		<form action="#" th:action="@{/signup}" th:object="${user}"
+			method="post">
+			<p>
+				Username: <input type="text" th:field="*{username}" />
+			</p>
+			<p>
+				Saving Number: <input type="text" th:field="*{savings_id}" />
+			</p>
+			<p>
+				Date of Birth: <input type="date" th:field="*{dob}" />
+			</p>
+			<p>
+				Password: <input type="password" th:field="*{password}" />
+			</p>
+			<p>
+				Repeat your password: <input type="password" th:field="*{password2}" />
+			</p>
+			<button type="submit" style="font-size: 100%; letter-spacing: 2px;">
+				Sign Up</button>
+		</form>
+	</div>
+
+	<br>
+	<br>
+
+	<div class="header"
+		style="background: rgb(24, 187, 217); background: linear-gradient(90deg, rgba(24, 187, 217, 1) 0%, rgba(76, 184, 243, 1) 59%, rgba(201, 162, 242, 1) 100%);"></div>
+
+
 </body>
 </html>
