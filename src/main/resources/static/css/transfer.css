@@ -58,7 +58,6 @@ button:hover {
 th, td {
   padding: 8px;
   text-align: left;
-  border-bottom: 1px solid white;
 }
 
 input[type=text], input[type=number] {
@@ -69,4 +68,24 @@ input[type=text], input[type=number] {
   border: 1px solid #ccc;
   box-sizing: border-box;
   border-radius: 12px;
+}
+
+.img {
+ position: relative;
+ text-align: center;
+ color: white;
+}
+
+.topcentered {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.centered {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

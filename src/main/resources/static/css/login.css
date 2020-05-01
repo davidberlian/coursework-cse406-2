@@ -33,11 +33,12 @@ button:hover {
 
 .container {
   padding: 2px;
+  margin-botton: 40px;
 }
 
 .box{
  margin: auto;
-  width: 60%;
+  width: 50%;
   border: 3px solid #f1f1f1;
   padding: 10px;
   background: white;
@@ -71,10 +72,7 @@ span.psw {
 	padding: 10px;
 	padding-left:25px;
 	box-sizing:border-box;
-	}
-	
-
-	
+}	
 	
 .banner {
   background: rgb(24,187,217);

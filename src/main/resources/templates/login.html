@@ -4,6 +4,7 @@
     <title>Login</title>
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/login.css}"/>
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/alert.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/footer.css}"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <script src="https://kit.fontawesome.com/6e68db03e6.js" crossorigin="anonymous"></script>
 </head>
@@ -11,7 +12,7 @@
 <body>
 
 <center>
-<h2 style="font-size:10%;"> <img th:src="@{/resources/img/logo.png}" style="width:150px;height:45px"/> </h2> 
+<a th:href="@{/logout}" class="logo"> <span><img th:src="@{/resources/img/logo.png}" style="width:150px;height:45px" /></span></a>
 </center>
 
 <div class="container" style="background-color:white"> 
@@ -19,7 +20,7 @@
 		<p style="font-size:250%;  letter-spacing: 4px; color: royalblue">Welcome back!</p>
 		<p style="font-size:95%;  letter-spacing: 2px";>Member Login</p><br>
 	</center>
-	<div class="box">
+	<div class="box" style="width:50%">
     	<form action="#" th:action="@{/login}" th:object="${user}" method="post">
 
 			<div class="alert" th:if="${message}" >
@@ -49,8 +50,41 @@
 	</div>
 </div>
 
-<br>
-<div class="container" style = "background-color: #4CB8F3"> </div> <br>
+<div class="container" style="background-color:white; padding: 50px"> </div>
+<hr>
+<div class="row">
+  <div class="column">
+  	<div class="footertext">
+	    <a style="font-size: 13px; color:#AED6F1; text-decoration:none"><b>OUR PRODUCT</b></a><br>
+	    <a href="#"  style="color:#BBEEFE; text-decoration:none">Loans</a><br>
+	    <a href="#"  style="color:#BBEEFE; text-decoration:none">Cards</a><br>
+	    <a href="#"  style="color:#BBEEFE; text-decoration:none">Digital Banking</a>
+    </div>
+  </div>
+  <div class="column">
+   <div class="footertext">
+	    <a style="font-size: 13px; color:#AED6F1; text-decoration:none"><b>ABOUT US</b></a><br>
+	    <a href="#"  style="color:#BBEEFE; text-decoration:none">About EE Bank</a><br>
+	    <a href="#"  style="color:#BBEEFE; text-decoration:none">Corporate Governance</a><br>
+	    <a href="#"  style="color:#BBEEFE; text-decoration:none">CSR</a>
+    </div>
+  </div>
+  <div class="column">
+  	<div class="footertext">
+	    <a style="font-size: 13px; color:#AED6F1; text-decoration:none"><b>SUPPORTS</b></a><br>
+	    <a href="#"  style="color:#BBEEFE; text-decoration:none">Contact Us</a><br>
+	    <a href="#"  style="color:#BBEEFE; text-decoration:none">FAQs</a><br>
+	    <a href="#"  style="color:#BBEEFE; text-decoration:none">Term of Use</a>
+  	</div>
+  </div>
+  
+  <div class="column">
+  	<div class="footertext">
+	    <p style="font-size: 13px; color:#AED6F1;"><b>EE-BANK CALL CENTER</b></p>
+	    <p style="font-size: 27px"> XX-XXXX-XXX</p>
+	</div>
+  </div>
+ </div>
     
 </body>
 </html>

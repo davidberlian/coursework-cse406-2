@@ -12,9 +12,9 @@
 <body>
 
 <div class="header">
-	  <a href="#default" class="logo"> <span><img th:src="@{/resources/img/logo.png}"style="width:155px;height:45px" /></span></a>
+	  <a th:href="@{/home}" class="logo"> <span><img th:src="@{/resources/img/logo.png}"style="width:155px;height:45px" /></span></a>
 <div class="header-right">
-	  <p th:text="Transfer" />
+	  <p th:text="Transfer " />
 	  </div>
 </div>
 <div class="header" style="background: rgb(24,187,217); background: linear-gradient(90deg, rgba(24,187,217,1) 0%, rgba(76,184,243,1) 59%, rgba(201,162,242,1) 100%)"> </div>
@@ -27,34 +27,39 @@
  	<b>Success!</b> Your transfer has been completed </p></center>
 
       <div class="box" style="border: 3px solid #ACF3A6 ; width: 70%;">
-           <table class="table">
-               <thead><td></td></thead>
-                <tr>
-                    <td>From Account</td>
-                    <td th:text=${transfer.accountNumber}></td>
-                </tr>
-                
-                <tr><td></td><td></td></tr>
-                <tr>
-                    <td>To Account</td>
-                    <td th:text=${transfer.destination_id}></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td th:text=${transfer.fullName}></td>
-                </tr>
-                <tr>
-                    <td>Amount</td>
-                    <td th:text=${transfer.amountCurr}></td>
-                </tr>
-                
-                <tr><td></td><td></td></tr>
-                <tr>
-                    <td>Remark</td>
-                    <td th:text=${transfer.message}></td>
-                </tr>
-                
-           </table>
+           <img th:src="@{/resources/img/logo_only.png}" alt="logo" style="width:100%; opacity:0.2">
+	        	<div class="centered" style="top:70%">
+		            <table class="table">
+		                <thead>
+		                	<td></td>
+		                </thead>
+		                <tr>
+		                    <td><b>From Account</b></td>
+		                    <td th:text=${transfer.accountNumber}></td>
+		                </tr>
+		                
+		                <tr><td></td><td></td></tr>
+		                <tr>
+		                    <td><b>To Account</b></td>
+		                    <td th:text=${transfer.destination_id}></td>
+		                </tr>
+		                <tr>
+		                    <td></td>
+		                    <td th:text=${transfer.fullName}></td>
+		                </tr>
+		                <tr>
+		                    <td><b>Amount</b></td>
+		                    <td th:text=${transfer.amountCurr}></td>
+		                </tr>
+		                
+		                <tr><td></td><td></td></tr>
+		                <tr>
+		                    <td><b>Remark</b></td>
+		                    <td th:text=${transfer.message}></td>
+		                </tr>
+		                
+		            </table>
+	            </div>
       </div>
 
 

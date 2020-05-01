@@ -31,36 +31,39 @@
         </div>
 
         <div class="box" style="border: 3px solid black; width: 70%;">
-            <table class="table">
-                <thead>
-                <td></td>
-                </thead>
-                <tr>
-                    <td>From Account</td>
-                    <td th:text=${transfer.accountNumber}></td>
-                </tr>
-                
-                <tr><td></td><td></td></tr>
-                <tr>
-                    <td>To Account</td>
-                    <td th:text=${transfer.destination_id}></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td th:text=${transfer.fullName}></td>
-                </tr>
-                <tr>
-                    <td>Amount</td>
-                    <td th:text=${transfer.amountCurr}></td>
-                </tr>
-                
-                <tr><td></td><td></td></tr>
-                <tr>
-                    <td>Remark</td>
-                    <td th:text=${transfer.message}></td>
-                </tr>
-                
-            </table>
+        	<img th:src="@{/resources/img/logo_only.png}" alt="logo" style="width:100%; opacity:0.2">
+	        	<div class="centered">
+		            <table class="table">
+		                <thead>
+		                	<td></td>
+		                </thead>
+		                <tr>
+		                    <td><b>From Account</b></td>
+		                    <td th:text=${transfer.accountNumber}></td>
+		                </tr>
+		                
+		                <tr><td></td><td></td></tr>
+		                <tr>
+		                    <td><b>To Account</b></td>
+		                    <td th:text=${transfer.destination_id}></td>
+		                </tr>
+		                <tr>
+		                    <td></td>
+		                    <td th:text=${transfer.fullName}></td>
+		                </tr>
+		                <tr>
+		                    <td><b>Amount</b></td>
+		                    <td th:text=${transfer.amountCurr}></td>
+		                </tr>
+		                
+		                <tr><td></td><td></td></tr>
+		                <tr>
+		                    <td><b>Remark</b></td>
+		                    <td th:text=${transfer.message}></td>
+		                </tr>
+		                
+		            </table>
+	            </div>
         </div>
         
         <div class="box">
