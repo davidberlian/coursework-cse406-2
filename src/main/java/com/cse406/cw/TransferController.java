@@ -113,6 +113,7 @@ public class TransferController {
                     System.out.println("BALANCE SUFFICIENT");
                     if(transfer.getId() > 0){
                         transfer.acceptRequest();
+                        transfer.setMessage(transfer.getMessage()+" via REQUEST");
                     }else{
                         System.out.println("REQUEST ID NOT DETECTED");
                     }
