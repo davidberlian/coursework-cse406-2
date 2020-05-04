@@ -1,7 +1,10 @@
 package com.cse406.cw.models;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class dummyAccount {
 	
@@ -9,6 +12,16 @@ public class dummyAccount {
 	private String last_name;
 	private Double initial_balance;
 	private String savings_id;
+
+	public String getDob() {
+		return dob;
+	}
+
+	public void setDob(String dob) {
+		this.dob = dob;
+	}
+
+	private String dob;
 	private String password;
 	
 	public dummyAccount() {
@@ -17,8 +30,9 @@ public class dummyAccount {
 	public Boolean checkAccount() {
 		System.out.println(this.first_name);
 		if(this.password.contentEquals("D.berlian19@") &&
-				!this.first_name.isEmpty() && 
-				!this.last_name.isEmpty() && 
+				!this.first_name.isEmpty() &&
+				!this.last_name.isEmpty() &&
+				!this.dob.isEmpty() &&
 				this.initial_balance >=0D &&
 				this.savings_id.length() == 11) {
 			return true;
@@ -26,10 +40,10 @@ public class dummyAccount {
 	}
 	public Boolean submit() {
 		DB_Connection conn = new DB_Connection();
-		
-		String query = "INSERT INTO savings(id, first_name, last_name, total_savings) VALUES"+
-				"('"+savings_id+"','"+first_name+"','"+
-				last_name+"',"+initial_balance+")";
+
+		String query = "INSERT INTO savings(id, first_name, last_name, dob, total_savings) VALUES"+
+				"('"+savings_id+"','"+first_name+"','"+last_name+"','"+
+				this.dob+"',"+initial_balance+")";
 		
 		System.out.println(query);
 		Boolean result = conn.write_query(query);
@@ -87,4 +101,5 @@ public class dummyAccount {
 	public void setInitial_balance(Double initial_balance) {
 		this.initial_balance = initial_balance;
 	}
+
 }

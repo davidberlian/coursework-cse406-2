@@ -1,6 +1,11 @@
 package com.cse406.cw.models;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class Signup {
@@ -8,6 +13,16 @@ public class Signup {
 	private String password;
 	private String password2;
 	private String savings_id;
+	private String email;
+
+	public String getDob() {
+		return dob;
+	}
+
+	public void setDob(String dob) {
+		this.dob = dob;
+	}
+
 	private String dob;
 	
 	public Signup() {
@@ -15,22 +30,35 @@ public class Signup {
 	}
 	
 	public Boolean checkfield() {
+
+		String regex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
+
+		Pattern pattern = Pattern.compile(regex);
+
+		Matcher matcher = pattern.matcher(this.email);
+
 		if(this.username.isEmpty() ||
 				this.password.isEmpty() ||
 				this.password2.isEmpty() ||
 				this.savings_id.isEmpty() ||
-				this.dob.isEmpty()) {
+				this.dob.isEmpty() || !matcher.matches() ||
+			 	!this.password.toString().equals(this.password2.toString())) {
+			System.out.println("Dsini "+this.password + " " + this.password2 + " = "+ this.password.toString().equals(this.password2.toString()));
 			return false;
 		}else {
 			return true;
 		}
 	}
-	
+	DB_Connection conn;
 	public Boolean validate() {
 		System.out.println("EXECUTE SQL");
 		try {
-		    DB_Connection conn = new DB_Connection();
-			String query = "SELECT * FROM user JOIN savings ON savings.user_id = user.id WHERE savings.id='"+this.savings_id+"' AND savings.user_id = 0";
+		    conn  = new DB_Connection();
+			System.out.println("DOB::::"+this.dob);
+			String query = "SELECT * FROM user JOIN savings ON savings.user_id = user.id WHERE " +
+					"savings.id='"+this.savings_id+"' AND " +
+					"savings.dob = '"+this.dob+"' AND savings.user_id = 0";
+
 			System.out.println(query);
 			ArrayList<String[]> Response= conn.read_query(query,new String[]{"id"});
 			if(Response.isEmpty()) {
@@ -40,8 +68,8 @@ public class Signup {
 				System.out.println(Response.get(0)[0]);
 				if(!Response.get(0)[0].isEmpty()) {
 					Boolean result = false;		
-					result = conn.write_query("INSERT INTO  `user`(`password`, `username`) VALUES ('"+this.password+
-					"','"+this.username+"')");
+					result = conn.write_query("INSERT INTO  `user`(`password`, `username`, email ) VALUES ('"+this.password+
+					"','"+this.username+"','"+this.email+"')");
 					if(result) {						
 						Response= conn.read_query("SELECT * FROM user WHERE username='"+this.username+"'",new String[]{"id"});
 						if(Response.isEmpty()) {
@@ -64,6 +92,26 @@ public class Signup {
 			e.printStackTrace();
 		}
 		return false;
+	}
+
+	public Boolean forgotCheck(){
+		try{
+			DB_Connection conn = new DB_Connection();
+			System.out.println("DOB::::"+this.dob);
+			String query = "SELECT * FROM user WHERE " +
+					"username='"+this.username+"' AND " +
+					"email = '"+this.email+"'";
+			System.out.println(query);
+			ArrayList<String[]> Response= conn.read_query(query,new String[]{"username"});
+			if(Response.isEmpty()) {
+				System.out.println("not found");
+				return false;
+			}else{
+				return true;
+			}
+		}catch (Exception e){
+			return false;
+		}
 	}
 	
 	
@@ -91,10 +139,12 @@ public class Signup {
 	public void setSavings_id(String savings_id) {
 		this.savings_id = savings_id;
 	}
-	public String getDob() {
-		return dob;
+
+	public String getEmail() {
+		return email;
 	}
-	public void setDob(String dob) {
-		this.dob = dob;
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }

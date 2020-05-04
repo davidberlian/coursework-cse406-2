@@ -17,3 +17,5 @@ buildNumber.properties
 *.xml
 *.war
 out/artifacts/
+*.iml
+.metadata/

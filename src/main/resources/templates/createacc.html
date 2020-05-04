@@ -12,7 +12,8 @@ asda
     
     	<form action="#" th:action="@{/createaccount}" th:object="${dummyAccount}" method="post">
     		<input type="text" placeholder="First Name" th:field="*{first_name}" />
-    		<input type="text" placeholder="Last name" th:field="*{last_name}" />
+			<input type="text" placeholder="Last name" th:field="*{last_name}" />
+			<input type="date" placeholder="Date of Birth" th:field="*{dob}" />
     		<input type="number" placeholder="Init Balance" th:field="*{initial_balance}" />
     		<input type="text" placeholder="Savings ID" th:field="*{savings_id}" />
     		<input type="password" placeholder="password" th:field="*{password}" />
