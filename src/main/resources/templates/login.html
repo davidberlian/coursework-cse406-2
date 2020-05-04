@@ -23,7 +23,7 @@
 	<div class="box" style="width:50%">
     	<form action="#" th:action="@{/login}" th:object="${user}" method="post">
 
-			<div class="alert" th:if="${message}" >
+			<div th:class="${alert}" th:if="${message}" >
 				<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
 				<p th:text="${message}"/>
 			</div>

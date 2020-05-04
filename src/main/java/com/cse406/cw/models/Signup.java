@@ -14,6 +14,7 @@ public class Signup {
 	private String password2;
 	private String savings_id;
 	private String email;
+	private String token;
 
 	public String getDob() {
 		return dob;
@@ -113,7 +114,76 @@ public class Signup {
 			return false;
 		}
 	}
-	
+	public Boolean insertForgotToken(String token){
+		try{
+			DB_Connection conn = new DB_Connection();
+			System.out.println("DOB::::"+this.dob);
+			String query = "INSERT INTO  `forgot`(`username`, token ) VALUES ('"+this.username+
+					"','"+token+"')";
+			System.out.println(query);
+			Boolean result = conn.write_query(query);
+			if(result) {
+				return true;
+			}else{
+				return false;
+			}
+		}catch (Exception e){
+			return false;
+		}
+	}
+
+	public Boolean checkForgotToken(){
+		try{
+			DB_Connection conn = new DB_Connection();
+			System.out.println("DOB::::"+this.dob);
+			String query = "SELECT * FROM forgot JOIN user ON user.username = forgot.username WHERE " +
+					"forgot.username='"+this.username+"' AND " +
+					"forgot.token = '"+this.token+"' AND " +
+					"user.email = '"+this.email+"' AND active = 1";
+			System.out.println(query);
+			ArrayList<String[]> Response= conn.read_query(query,new String[]{"username"});
+			if(Response.isEmpty()) {
+				System.out.println("not found");
+				return false;
+			}else{
+				return true;
+			}
+		}catch (Exception e){
+			return false;
+		}
+	}
+
+	public Boolean disolveToken(){
+		try{
+			DB_Connection conn = new DB_Connection();
+			String query = "UPDATE forgot SET active = 0  WHERE " +
+					"username='"+this.username+"'";
+			Boolean result = conn.write_query(query);
+			if(result) {
+				return true;
+			}else {
+				return false;
+			}
+		}catch (Exception e){
+			return false;
+		}
+	}
+	public Boolean updatePassword(){
+		try{
+			DB_Connection conn = new DB_Connection();
+			String query = "UPDATE user SET password = '" +
+					this.password+"'  WHERE " +
+					"username='"+this.username+"'";
+			Boolean result = conn.write_query(query);
+			if(result) {
+				return true;
+			}else {
+				return false;
+			}
+		}catch (Exception e){
+			return false;
+		}
+	}
 	
 	public String getUsername() {
 		return username;
@@ -146,5 +216,13 @@ public class Signup {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 }

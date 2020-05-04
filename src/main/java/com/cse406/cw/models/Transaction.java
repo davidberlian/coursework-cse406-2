@@ -14,6 +14,7 @@ public class Transaction {
 	private String currentbalance;
 
 
+
 	public Transaction(String datetime, String message, String amount) {
 
 		this.datetime = datetime;

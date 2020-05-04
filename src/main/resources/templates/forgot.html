@@ -19,10 +19,11 @@
     <center>
         <p style="font-size:95%;  letter-spacing: 2px";>Member Forgot Password</p><br>
     </center>
+
     <div class="box" style="width:50%">
         <form action="#" th:action="@{/forgot}" th:object="${user}" method="post">
 
-            <div class="alert" th:if="${message}" >
+            <div th:class="${alert}" th:if="${message}" >
                 <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
                 <p th:text="${message}"/>
             </div>
@@ -36,6 +37,10 @@
 
         </form>
         <center>
+            <form action="#" th:action="@{/login}">
+                <button type="submit" style="font-size:80%; width: 50%; background: rgb(24,187,217); background: linear-gradient(90deg, rgba(24,187,217,1) 0%, rgba(76,184,243,1) 59%, rgba(201,162,242,1) 100%);">
+                    <b>Already Have Account? Login now</b></button>
+            </form>
             <form action="#" th:action="@{/signup}">
                 <button type="submit" style="font-size:80%; width: 50%; background: rgb(24,187,217); background: linear-gradient(90deg, rgba(24,187,217,1) 0%, rgba(76,184,243,1) 59%, rgba(201,162,242,1) 100%);">
                     <b>New User? Join us now</b></button>

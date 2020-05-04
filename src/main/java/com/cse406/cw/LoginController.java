@@ -26,6 +26,12 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.SocketException;
+import java.net.UnknownHostException;
+import java.util.Random;
+
 
 @Controller
 public class LoginController {
@@ -35,6 +41,7 @@ public class LoginController {
 
 	@GetMapping("/login")
 	public String login(Model model) {
+		model.addAttribute( "message" ,model.asMap().get("message"));
 	    model.addAttribute("user", new User());
 		return "login";
 	}
@@ -53,8 +60,10 @@ public class LoginController {
 				newSession.setAttribute("token", user.getToken());
 				return "redirect:/home";
 			}else {
-				System.out.println("Failed");	 
-				model.addAttribute("message", "Incorrect Username or Password");    
+				System.out.println("Failed");
+
+				model.addAttribute("alert", "alert");
+				model.addAttribute("message", "Incorrect Username or Password");
 				return "login";
 			}
 		}else {
@@ -79,42 +88,105 @@ public class LoginController {
 
 
 	@GetMapping("/forgot")
-	public String forgot(Model model, HttpServletRequest request) {
+	public String forgot(RedirectAttributes redirectAttrs, Model model, HttpServletRequest request) {
 		model.addAttribute("user", new Signup());
 		model.addAttribute( "message" ,model.asMap().get("message"));
 		return "forgot";
 	}
 
-	@PostMapping("/forgot")
-	public String forgot_check(RedirectAttributes redirectAttrs, Model model, HttpServletRequest request, @ModelAttribute Signup user) {
+	protected String generateToken() {
+		String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+		StringBuilder salt = new StringBuilder();
+		Random rnd = new Random();
+		while (salt.length() < 7) { // length of the random string.
+			int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+			salt.append(SALTCHARS.charAt(index));
+		}
+		String saltStr = salt.toString();
+		return saltStr;
+
+	}
+	@GetMapping("/resetpassword")
+	public String reset_password(RedirectAttributes redirectAttrs, Model model, HttpServletRequest request) {
+		model.addAttribute("user", new Signup());
+		model.addAttribute( "message" ,model.asMap().get("message"));
+		model.addAttribute( "alert" ,model.asMap().get("alert"));
+		return "resetpassword";
+	}
+	@PostMapping("/resetpassword")
+	public String reset_password2(RedirectAttributes redirectAttrs, Model model, HttpServletRequest request,@ModelAttribute Signup user) {
+		// check token
+		// update password
 		try{
+			if(user.checkForgotToken() && user.getPassword().equals(user.getPassword2())){
+				user.disolveToken();
+				user.updatePassword();redirectAttrs.addFlashAttribute("alert","alert2");
+				redirectAttrs.addFlashAttribute("message","your password has been successfully updated");
+				return "redirect:/login";
+			}else{redirectAttrs.addFlashAttribute("alert","alert");
+				redirectAttrs.addFlashAttribute("message","Invalid Data");
+				return "redirect:/resetpassword";
+			}
+		}catch (Exception e){
+			redirectAttrs.addFlashAttribute("alert","alert");
+			redirectAttrs.addFlashAttribute("message","Something went wrong please try again");
+			return "redirect:/resetpassword";
+		}
+	}
+
+	@PostMapping("/forgot")
+	public String forgot_check(RedirectAttributes redirectAttrs, HttpServletRequest request, @ModelAttribute Signup user) {
+		try{
+			System.out.println("93 check Strart");
 			if(user.forgotCheck()){
 				try{
-					sendMail();
+					String token = generateToken();
+					System.out.println("93 check success"+user.getEmail());
+					if(sendMail(user.getEmail(),token)){
+						user.insertForgotToken(token);
+						redirectAttrs.addFlashAttribute("message","if. your email and username match the system data, an email will be sent");
+						redirectAttrs.addFlashAttribute("alert","alert2");
+						return "redirect:/forgot";
+					}else{
+						redirectAttrs.addFlashAttribute("message","Please Contact Admin");
+						redirectAttrs.addFlashAttribute("alert","alert");
+						return "redirect:/forgot";
+					}
 				}catch (Exception e){
-
+					
 				}finally {
 
 				}
 			}
-			redirectAttrs.addAttribute("message","if your email and username match the system data, an email will be sent");
+			redirectAttrs.addFlashAttribute("message","if your email and username match the system data, an email will be sent");
+			redirectAttrs.addFlashAttribute("alert","alert2");
 			return "redirect:/forgot";
 		}catch (Exception E){
-			redirectAttrs.addAttribute("message","Something went wrong plase try again");
+			redirectAttrs.addFlashAttribute("message","Something went wrong please try again");
+			redirectAttrs.addFlashAttribute("alert","alert");
 			return "redirect:/forgot";
 		}
 	}
 
-	public Boolean sendMail() {
+	public Boolean sendMail(String email, String token) throws UnknownHostException, SocketException {
 		      //provide recipient's email ID
-		      String to = "david.berlian@gmail.com";
+		      String to = email;
 
 		      //provide sender's email ID
-		      String from = "Bank EE CS";
-		      //provide Mailtrap's username
-		      final String username = "eebankcse406@gmail.com";
-		      //provide Mailtrap's password
-		      final String password = "D.berlian19@";
+				String from = "davidberlian.com";
+				try(final DatagramSocket socket = new DatagramSocket()){
+				  socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
+				  from = socket.getLocalAddress().getHostAddress();
+				}
+
+		//provide Mailtrap's username
+		// final String username = "4d805ec5e82105";
+		//provide Mailtrap's password
+		//final String password = "0d4a8b2d3939e8";
+		//provide Mailtrap's username
+		final String username = "eebankcse406@gmail.com";
+		//provide Mailtrap's password
+		final String password = "D.berlian19@";
 
 		      //provide Mailtrap's host address 
 		      String host = "smtp.gmail.com";
@@ -138,17 +210,17 @@ public class LoginController {
 		    Message message = new MimeMessage(session);
 		 
 		    //set From email field 
-		    message.setFrom(new InternetAddress("18.163.170.111"));
+		    message.setFrom(new InternetAddress(from));
 		 
 		    //set To email field
 		    message.setRecipients(Message.RecipientType.TO,
 		               InternetAddress.parse(to));
 		 
 		    //set email subject field
-		    message.setSubject("Here comes Jakarta Mail!");
+		    message.setSubject("Reset Account");
 		 
 		    //set the content of the email message
-		    message.setContent("Just discovered that Jakarta Mail is fun and easy to use", "text/html");
+		    message.setContent("click here <a href=\"http://localhost:8080/cw_war/resetpassword\" >here</a> Your token is "+token, "text/html");
 
 		    //send the email message
 		    Transport.send(message);
@@ -156,6 +228,7 @@ public class LoginController {
 		    System.out.println("Email Message Sent Successfully");
 		    	return true;
 		      } catch (MessagingException e) {
+		    	  e.printStackTrace();
 		        return false;
 		      }
 		   }
