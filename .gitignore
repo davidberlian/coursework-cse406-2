@@ -17,3 +17,5 @@ buildNumber.properties
 *.xml
 *.war
 *.war
+.metadata/
+out/
