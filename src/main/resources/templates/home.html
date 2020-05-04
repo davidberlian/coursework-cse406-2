@@ -21,8 +21,8 @@
 
 <div class = "main">
 	<div class="header">
-	  <a href="#default" class="logo"> <span><img th:src="@{/resources/img/logo.png}"style="width:155px;height:45px" /></span></a>
-	  <div class="header-right">
+		<a th:href="@{/home}" class="logo"> <span><img th:src="@{/resources/img/logo.png}"style="width:155px;height:45px" /></span></a>
+		<div class="header-right">
 	  	<form action="#" th:action="@{/logout}">
 	    <a>  <p style="font-size:100%; letter-spacing: 2px"> <p th:text="'Hello, ' + ${user.username} + '!'" /> </p></a>
 			<button type="submit" style = "border: 1pxl; background: white; color: #FC5A5A; font-size:250%">

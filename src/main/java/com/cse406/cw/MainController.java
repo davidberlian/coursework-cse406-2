@@ -17,11 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cse406.cw.models.User;
-import com.cse406.cw.models.dummyAccount;
-import com.cse406.cw.models.Month;
-import com.cse406.cw.models.Transaction;
-
-
+import com.cse406.cw.models.*;
 
 @Controller
 public class MainController {
