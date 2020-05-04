@@ -79,5 +79,18 @@ button {
 }
 
 button:hover {
-	opacity: 0.8;
+
+  opacity: 0.8;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  padding: 5px;
+  text-align: left;
+  border-bottom: 1px solid  #4cb8F3;
+
 }

@@ -70,4 +70,37 @@ input[type=text], input[type=number] {
 	border: 1px solid #ccc;
 	box-sizing: border-box;
 	border-radius: 12px;
+  padding: 8px;
+  text-align: left;
 }
+
+input[type=text], input[type=number] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  border-radius: 12px;
+}
+
+.img {
+ position: relative;
+ text-align: center;
+ color: white;
+}
+
+.topcentered {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.centered {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+

@@ -21,10 +21,6 @@ public class RequestController {
     public String request2(Model model, HttpServletRequest request, @ModelAttribute Transfer transfer){
         System.out.println(transfer.getResponse()+" "+transfer.toString2());
 
-                //TODO send the money -> transaction check balance, update balance, insert transaction
-        //TODO update request accordingly
-        //TODO set flash attribute
-            //
         User user = new User();
         HttpSession newSession = request.getSession();
         System.out.println("SESSION DATA" + newSession.getAttribute("token").toString());
@@ -46,6 +42,8 @@ public class RequestController {
                             model.addAttribute("transfer", transfer);
                             return "transfer_confirmation.html";
                         }
+                    }else{
+
                     }
                 }
                 return "request";
@@ -60,9 +58,7 @@ public class RequestController {
         }else{
             return "redirect:/login";
         }
-
-
-        return "";
+        return "redirect://login";
     }
     @GetMapping("/request")
     public String request(Model model,HttpServletRequest request, @ModelAttribute Transfer newTransferRequest){
@@ -77,7 +73,7 @@ public class RequestController {
 
             if( newTransferRequest != null) {
                 if(newTransferRequest.getDestination_id() != null
-                        || newTransferRequest.getAmount() != null){
+                        || newTransferRequest.getAmount() >0){
 
                     newTransferRequest.setRequester(user.getAccountNumber());
                     newTransferRequest.setReceiver(newTransferRequest.getDestination_id());

@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-<script src="https://kit.fontawesome.com/6e68db03e6.js"
-	crossorigin="anonymous"></script>
-<meta charset="UTF-8">
-<title>Fund Transfer</title>
-<link rel="stylesheet" type="text/css"
-	th:href="@{/resources/css/alert.css}" />
-<link rel="stylesheet" type="text/css"
-	th:href="@{/resources/css/transfer.css}" />
-<link rel="stylesheet" type="text/css"
-	th:href="@{/resources/css/sidebar.css}" />
+	<script src="https://kit.fontawesome.com/6e68db03e6.js" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <title>Fund Transfer</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/alert.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/transfer.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/sidebar.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/footer.css}"/>
+
 </head>
 <body>
 
@@ -36,52 +34,67 @@
 			style="background: rgb(24, 187, 217); background: linear-gradient(90deg, rgba(24, 187, 217, 1) 0%, rgba(76, 184, 243, 1) 59%, rgba(201, 162, 242, 1) 100%)">
 		</div>
 
-		<div class="container" style="background-color: white">
-			<center>
-				<h2>Fund Transfer</h2>
-				<br>
-			</center>
-			<hr>
-			<div class="box">
-				<form action="#" th:action="@{/transfer}" th:object="${transfer}"
-					method="post">
+<div class="header">
+	  <a th:href="@{/home}" class="logo"> <span><img th:src="@{/resources/img/logo.png}"style="width:155px;height:45px" /></span></a>
+<div class="header-right">
+	  <p th:text="Transfer" />
+	  </div>
+</div>
+<div class="header" style="background: rgb(24,187,217); background: linear-gradient(90deg, rgba(24,187,217,1) 0%, rgba(76,184,243,1) 59%, rgba(201,162,242,1) 100%)"> </div>
 
-					<div th:class="${alertClass}" th:if="${message}">
-						<span class="closebtn"
-							onclick="this.parentElement.style.display='none';">&times;</span>
-						<strong>Please re-check</strong>
-						<p th:text="${message}" />
-					</div>
-					<table>
-						<tr>
-							<td>From account:</td>
-							<td><input type="text" disabled
-								th:value="${user.accountNumber}" /> <input type="hidden"
-								id="accountNumber" th:field="*{accountNumber}" /></td>
-						</tr>
-						<tr>
-							<td>To account:</td>
-							<td><input type="number" th:field="*{destination_id}" /></td>
-						</tr>
-						<tr>
-							<td>Amount:</td>
-							<td><input type="number" th:field="*{amount}" /></td>
-						</tr>
-						<tr>
-							<td>Remark:</td>
-							<td><input type="text" th:field="*{message}" /></td>
-						</tr>
-					</table>
-					<button type="submit" style="font-size: 80%">
-						<b>Preview Transfer</b>
-					</button>
-				</form>
-			</div>
-			<hr>
+<div class="container" style="background-color:white"> 
+ <center>
+		<h2 style="font-size:200%">Fund Transfer</h2><br>
+	</center>
+<hr>	
+	<div class="box">
+    	 <form action="#" th:action="@{/transfer}" th:object="${transfer}" method="post">
+
 
 		</div>
 	</div>
 
+<hr>
+	
+</div>
 
+
+<div class="container" style="background-color:white; padding:70px"> </div>
+
+<div class="row">
+  <div class="column">
+  	<div class="footertext">
+	    <a style="font-size: 13px; color:#AED6F1; text-decoration:none"><b>OUR PRODUCT</b></a><br>
+	    <a href="#"  style="color:#BBEEFE; text-decoration:none">Loans</a><br>
+	    <a href="#"  style="color:#BBEEFE; text-decoration:none">Cards</a><br>
+	    <a href="#"  style="color:#BBEEFE; text-decoration:none">Digital Banking</a>
+    </div>
+  </div>
+  <div class="column">
+   <div class="footertext">
+	    <a style="font-size: 13px; color:#AED6F1; text-decoration:none"><b>ABOUT US</b></a><br>
+	    <a href="#"  style="color:#BBEEFE; text-decoration:none">About EE Bank</a><br>
+	    <a href="#"  style="color:#BBEEFE; text-decoration:none">Corporate Governance</a><br>
+	    <a href="#"  style="color:#BBEEFE; text-decoration:none">CSR</a>
+    </div>
+  </div>
+  <div class="column">
+  	<div class="footertext">
+	    <a style="font-size: 13px; color:#AED6F1; text-decoration:none"><b>SUPPORTS</b></a><br>
+	    <a href="#"  style="color:#BBEEFE; text-decoration:none">Contact Us</a><br>
+	    <a href="#"  style="color:#BBEEFE; text-decoration:none">FAQs</a><br>
+	    <a href="#"  style="color:#BBEEFE; text-decoration:none">Term of Use</a>
+  	</div>
+  </div>
+  
+  <div class="column">
+  	<div class="footertext">
+	    <p style="font-size: 13px; color:#AED6F1;"><b>EE-BANK CALL CENTER</b></p>
+	    <p style="font-size: 27px"> XX-XXXX-XXX</p>
+	</div>
+  </div>
+ </div>
+
+</div>
 </body>
 </html>

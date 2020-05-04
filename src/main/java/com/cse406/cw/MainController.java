@@ -17,21 +17,31 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cse406.cw.models.User;
-import com.cse406.cw.models.dummyAccount;
-import com.cse406.cw.models.Month;
-import com.cse406.cw.models.Transaction;
-
-
+import com.cse406.cw.models.*;
 
 @Controller
 public class MainController {
 
 	@GetMapping("/")
-	public String index() {
+	public String index(HttpServletRequest request) {
 		//model.addAttribute("name", name);
-		return "index";
-	}
+		try {
+			User user = new User();
+			HttpSession newSession = request.getSession();
+			System.out.println("SESSION DATA" + newSession.getAttribute("token").toString());
+			user.setUsername(newSession.getAttribute("username").toString());
+			user.setToken(newSession.getAttribute("token").toString());
 
+			if (user.checkToken()) {
+				return "redirect:/home";
+			}else{
+				return "index";
+			}
+		}catch(Exception e){
+				return "index";
+			}
+
+	}
 
 	@GetMapping("/createaccount")
 	public String login(Model model) {

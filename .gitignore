@@ -15,3 +15,7 @@ buildNumber.properties
 .classpath
 *.prefs
 *.xml
+*.war
+*.war
+.metadata/
+out/

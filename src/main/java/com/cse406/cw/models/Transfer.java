@@ -178,7 +178,8 @@ public class Transfer {
                             "JOIN savings as s1 ON s1.id = tr.savings_id "+
                             "JOIN savings as s2 ON s2.id = tr.destination_id "+
                             "WHERE tr.savings_id ='"+this.accountNumber+"' " +
-                            "OR tr.destination_id = '"+this.accountNumber+"' ";
+                            "OR tr.destination_id = '"+this.accountNumber+"' " +
+                            "ORDER BY time desc";
             System.out.println(query);
             ArrayList<String[]> Response= conn.read_query(
                     query

@@ -13,14 +13,34 @@
 	th:href="@{/resources/css/insideApplication.css}" />
 </head>
 
-<body>
+<body> 
 
-	<div class="sidebar">
-		<br> <a th:href="@{/home}"><i class="fa fa-fw fa-home"></i>
-			Home</a><br> <a th:href="@{/setting}"><i
-			class="fa fa-fw fa-wrench"></i> Setting</a><br> <a
-			th:href="@{/personal}"><i class="fa fa-fw fa-user"></i> Personal
-			Info</a><br>
+<div class="sidebar">
+<br>
+  <a th:href="@{/home}"><i class="fa fa-fw fa-home"></i> Home</a><br>
+  <a th:href="@{/setting}"><i class="fa fa-fw fa-wrench"></i> Setting</a ><br>
+  <a th:href="@{/personal}"><i class="fa fa-fw fa-user"></i> Personal Info</a><br>
+</div>
+
+<div class = "main">
+	<div class="header">
+		<a th:href="@{/home}" class="logo"> <span><img th:src="@{/resources/img/logo.png}"style="width:155px;height:45px" /></span></a>
+		<div class="header-right">
+	  	<form action="#" th:action="@{/logout}">
+	    <a>  <p style="font-size:100%; letter-spacing: 2px"> <p th:text="'Hello, ' + ${user.username} + '!'" /> </p></a>
+			<button type="submit" style = "border: 1pxl; background: white; color: #FC5A5A; font-size:250%">
+			<i class="fas fa-sign-out-alt"></i></button>
+		</form>
+	  </div>
+	</div>
+	
+	<div class="header" style = "background-color: #4CB8F3"> </div> <br>
+	
+	<div class="img" >
+		<img th:src="@{/resources/img/balance.png}" alt="balance" style="width:300px;height:250px">
+		<div class="topcentered" style="color: #4F4E56">Cash Balance</div>
+		<div class="centered" style="color: #4F4E56; font-size:350%"><p th:text="'$' + ${user.savings}" /></div>
+
 	</div>
 
 	<div class="main">
