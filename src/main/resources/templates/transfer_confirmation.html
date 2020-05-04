@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Transfer Confirmation</title>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/alert.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/sidebar.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/transfer.css}"/>
+<meta charset="UTF-8">
+<title>Transfer Confirmation</title>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" type="text/css"
+	th:href="@{/resources/css/alert.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/resources/css/sidebar.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/resources/css/transfer.css}" />
 </head>
 <body>
 
@@ -18,18 +21,18 @@
 </div>
 <div class="header" style="background: rgb(24,187,217); background: linear-gradient(90deg, rgba(24,187,217,1) 0%, rgba(76,184,243,1) 59%, rgba(201,162,242,1) 100%)"> </div>
 
-<div class="container" style="background-color:white"> 
-<div class="box">
 
-    <div th:class="${alertClass}" th:if="${message}" >
-        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-        <strong>Danger!</strong><p th:text="${message}"/>
-    </div>
-    <div class="w3-container">
-        <div class="row">
-            <h2>Transfer Confirmation</h2>
-        </div>
+						<tr>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>Remark</td>
+							<td th:text=${transfer.message}></td>
+						</tr>
 
+					</table>
+				</div>
         <div class="box" style="border: 3px solid black; width: 70%;">
         	<img th:src="@{/resources/img/logo_only.png}" alt="logo" style="width:100%; opacity:0.2">
 	        	<div class="centered">
@@ -80,9 +83,9 @@
               <button type="submit" style="font-size:100%; letter-spacing: 2px;">BACK</button><br>
             </form>
        	 </div>
+
 		</div>
 	</div>
-</div>
 
 </body>
 </html>

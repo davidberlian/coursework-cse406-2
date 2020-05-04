@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Transfer Confirmation Receipt</title>
-    <script src="https://kit.fontawesome.com/6e68db03e6.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/alert.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/sidebar.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/transfer.css}"/>
+<meta charset="UTF-8">
+<title>Transfer Confirmation Receipt</title>
+<script src="https://kit.fontawesome.com/6e68db03e6.js"
+	crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" type="text/css"
+	th:href="@{/resources/css/alert.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/resources/css/sidebar.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/resources/css/transfer.css}" />
 </head>
 <body>
 
@@ -19,12 +23,10 @@
 </div>
 <div class="header" style="background: rgb(24,187,217); background: linear-gradient(90deg, rgba(24,187,217,1) 0%, rgba(76,184,243,1) 59%, rgba(201,162,242,1) 100%)"> </div>
 
-<div class="container" style="background-color:white"> 
-<div class="box">
- 
- <center><p style="font-size: 200%; color: #ACF3A6 ">
- 	<i class="fas fa-check-circle"></i><br>
- 	<b>Success!</b> Your transfer has been completed </p></center>
+
+	<div class="container" style="background-color: white">
+		<div class="box">
+
 
       <div class="box" style="border: 3px solid #ACF3A6 ; width: 70%;">
            <img th:src="@{/resources/img/logo_only.png}" alt="logo" style="width:100%; opacity:0.2">
@@ -63,7 +65,47 @@
       </div>
 
 
-</div>
-</div>
+			<div class="box" style="border: 3px solid #ACF3A6; width: 70%;">
+				<table class="table">
+					<thead>
+						<td></td>
+					</thead>
+					<tr>
+						<td>From Account</td>
+						<td th:text=${transfer.accountNumber}></td>
+					</tr>
+
+					<tr>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>To Account</td>
+						<td th:text=${transfer.destination_id}></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td th:text=${transfer.fullName}></td>
+					</tr>
+					<tr>
+						<td>Amount</td>
+						<td th:text=${transfer.amountCurr}></td>
+					</tr>
+
+					<tr>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>Remark</td>
+						<td th:text=${transfer.message}></td>
+					</tr>
+
+				</table>
+			</div>
+
+
+		</div>
+	</div>
 </body>
 </html>

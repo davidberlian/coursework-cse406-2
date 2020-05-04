@@ -1,59 +1,59 @@
 body {
-  font-family: Avenir;
+	font-family: Avenir;
 }
 
 .header {
-  overflow: hidden;
-  background-color: white;
-  padding: 2px;  
+	overflow: hidden;
+	background-color: white;
+	padding: 2px;
 }
 
 .header a {
-  float: left;
-  color: black;
-  text-align: center;
-  padding: 12px;
-  text-decoration: none;
-  font-size: 18px;
-  line-height: 25px;
-  border-radius: 4px;
+	float: left;
+	color: black;
+	text-align: center;
+	padding: 12px;
+	text-decoration: none;
+	font-size: 18px;
+	line-height: 25px;
+	border-radius: 4px;
 }
 
 .header a:hover {
- opacity: 0.8;
+	opacity: 0.8;
 }
 
 .header-right {
-  float: right;
+	float: right;
 }
 
 table {
-  border-collapse: collapse;
-  width: 100%;
+	border-collapse: collapse;
+	width: 100%;
 }
 
 th, td {
-  padding: 8px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
+	padding: 8px;
+	text-align: left;
+	border-bottom: 1px solid #ddd;
 }
 
 .img {
- position: relative;
- text-align: center;
- color: white;
+	position: relative;
+	text-align: center;
+	color: white;
 }
 
 .topcentered {
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+	position: absolute;
+	top: 30%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
 .centered {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }

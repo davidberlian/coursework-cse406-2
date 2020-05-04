@@ -8,17 +8,31 @@
     <link rel="stylesheet" type="text/css" th:href="@{/resources/css/transfer.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/resources/css/sidebar.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/resources/css/footer.css}"/>
+
 </head>
 <body>
 
-<div class="sidebar">
-<br>
-  <a th:href="@{/home}"><i class="fa fa-fw fa-home"></i> Home</a><br>
-  <a th:href="@{/setting}"><i class="fa fa-fw fa-wrench"></i> Setting</a ><br>
-  <a th:href="@{/personal}"><i class="fa fa-fw fa-user"></i> Personal Info</a><br>
-</div>
+	<div class="sidebar">
+		<br> <a th:href="@{/home}"><i class="fa fa-fw fa-home"></i>
+			Home</a><br> <a th:href="@{/setting}"><i
+			class="fa fa-fw fa-wrench"></i> Setting</a><br> <a
+			th:href="@{/personal}"><i class="fa fa-fw fa-user"></i> Personal
+			Info</a><br>
+	</div>
 
-<div class = "main">
+	<div class="main">
+
+		<div class="header">
+			<a href="#default" class="logo"> <span><img
+					th:src="@{/resources/img/logo.png}"
+					style="width: 155px; height: 45px" /></span></a>
+			<div class="header-right">
+				<p th:text="Transfer" />
+			</div>
+		</div>
+		<div class="header"
+			style="background: rgb(24, 187, 217); background: linear-gradient(90deg, rgba(24, 187, 217, 1) 0%, rgba(76, 184, 243, 1) 59%, rgba(201, 162, 242, 1) 100%)">
+		</div>
 
 <div class="header">
 	  <a th:href="@{/home}" class="logo"> <span><img th:src="@{/resources/img/logo.png}"style="width:155px;height:45px" /></span></a>
@@ -36,35 +50,14 @@
 	<div class="box">
     	 <form action="#" th:action="@{/transfer}" th:object="${transfer}" method="post">
 
-			<div th:class="${alertClass}" th:if="${message}" >
-       		 <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-       		 <strong>Please re-check</strong><p th:text="${message}"/>
-   	 		</div>
-   	 		<table>
-   	 			<tr>
-					<td>From account: </td>
-					<td><input type="text" disabled th:value="${user.accountNumber}" />
-            		<input type="hidden" id="accountNumber" th:field="*{accountNumber}"/></td>
-            	</tr>
-            	<tr>
-            		<td>To account: </td>
-            		<td><input type="number" th:field="*{destination_id}"/></td>
-            	</tr>	
-            	<tr>
-            		<td>Amount: </td>
-            		<td><input type="number" th:field="*{amount}"/></td>
-            	</tr>
-            	<tr>
-            		<td>Remark: </td>
-            		<td><input type="text" th:field="*{message}" /></td>
-            	</tr>
-            </table>
-            <button type="submit" style="font-size:80%"><b>Preview Transfer</b></button> 
-        </form>
+
+		</div>
 	</div>
+
 <hr>
 	
 </div>
+
 
 <div class="container" style="background-color:white; padding:70px"> </div>
 
