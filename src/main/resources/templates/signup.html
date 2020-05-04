@@ -1,74 +1,74 @@
 <!DOCTYPE HTML>
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
-    <title>Sign up</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/signup.css}"/>
+	<title>Sign up</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/signup.css}"/>
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/alert.css}"/>
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/footer.css}"/>
 </head>
 <body>
 
 <div class="header">
-	  <a th:href="@{/logout}" class="logo"> <span><img th:src="@{/resources/img/logo.png}" style="width:150px;height:45px" /></span></a>
+	<a th:href="@{/logout}" class="logo"> <span><img th:src="@{/resources/img/logo.png}" style="width:150px;height:45px" /></span></a>
 	<div class="header-right">
-	  <a href="login"  style = "background-color: #3C59D5; color : white">Sign in</a>
-
+		<a href="login"  style = "background-color: #3C59D5; color : white">Sign in</a>
 	</div>
+</div>
 
-	<center>
-		<h1>Join Us</h1>
-	</center>
+<center>
+	<h1>Join Us</h1>
+</center>
 
-	<div class="box">
-		<div th:if="${message}" th:text="${message}" th:class="${'alert ' + alertClass}"></div>
-		<form action="#" th:action="@{/signup}" th:object="${user}" method="post">
-			<p>Username: <input type="text" th:field="*{username}" /></p>
-			<p>Email: <input type="text" th:field="*{email}" /></p>
-		    	<p>Saving Number: <input type="text" th:field="*{savings_id}" /></p>
-		    	<p>Date of Birth: <input type="date" th:field="*{dob}" /></p>
-		        <p>Password: <input type="password" th:field="*{password}" /></p>
-		        <p>Repeat your password: <input type="password" th:field="*{password2}" /></p>
-				<button type="submit" style="font-size:100%; letter-spacing: 2px;"> Sign Up </button>
-   		 </form>
-	</div>    
-	
-<div class="header" style="background-color:white; padding: 50px"></div> 
+<div class="box">
+	<div th:if="${message}" th:text="${message}" th:class="${'alert ' + alertClass}"></div>
+	<form action="#" th:action="@{/signup}" th:object="${user}" method="post">
+		<p>Username: <input type="text" th:field="*{username}" /></p>
+		<p>Email: <input type="text" th:field="*{email}" /></p>
+		<p>Saving Number: <input type="text" th:field="*{savings_id}" /></p>
+		<p>Date of Birth: <input type="date" th:field="*{dob}" /></p>
+		<p>Password: <input type="password" th:field="*{password}" /></p>
+		<p>Repeat your password: <input type="password" th:field="*{password2}" /></p>
+		<button type="submit" style="font-size:100%; letter-spacing: 2px;"> Sign Up </button>
+	</form>
+</div>
+
+<div class="header" style="background-color:white; padding: 50px"></div>
 
 <hr>
 <div class="row">
-  <div class="column">
-  	<div class="footertext">
-	    <a style="font-size: 13px; color:#AED6F1; text-decoration:none"><b>OUR PRODUCT</b></a><br>
-	    <a href="#"  style="color:#BBEEFE; text-decoration:none">Loans</a><br>
-	    <a href="#"  style="color:#BBEEFE; text-decoration:none">Cards</a><br>
-	    <a href="#"  style="color:#BBEEFE; text-decoration:none">Digital Banking</a>
-    </div>
-  </div>
-  <div class="column">
-   <div class="footertext">
-	    <a style="font-size: 13px; color:#AED6F1; text-decoration:none"><b>ABOUT US</b></a><br>
-	    <a href="#"  style="color:#BBEEFE; text-decoration:none">About EE Bank</a><br>
-	    <a href="#"  style="color:#BBEEFE; text-decoration:none">Corporate Governance</a><br>
-	    <a href="#"  style="color:#BBEEFE; text-decoration:none">CSR</a>
-    </div>
-  </div>
-  <div class="column">
-  	<div class="footertext">
-	    <a style="font-size: 13px; color:#AED6F1; text-decoration:none"><b>SUPPORTS</b></a><br>
-	    <a href="#"  style="color:#BBEEFE; text-decoration:none">Contact Us</a><br>
-	    <a href="#"  style="color:#BBEEFE; text-decoration:none">FAQs</a><br>
-	    <a href="#"  style="color:#BBEEFE; text-decoration:none">Term of Use</a>
-  	</div>
-  </div>
-  
-  <div class="column">
-  	<div class="footertext">
-	    <p style="font-size: 13px; color:#AED6F1;"><b>EE-BANK CALL CENTER</b></p>
-	    <p style="font-size: 27px"> XX-XXXX-XXX</p>
+	<div class="column">
+		<div class="footertext">
+			<a style="font-size: 13px; color:#AED6F1; text-decoration:none"><b>OUR PRODUCT</b></a><br>
+			<a href="#"  style="color:#BBEEFE; text-decoration:none">Loans</a><br>
+			<a href="#"  style="color:#BBEEFE; text-decoration:none">Cards</a><br>
+			<a href="#"  style="color:#BBEEFE; text-decoration:none">Digital Banking</a>
+		</div>
 	</div>
-  </div>
- </div>
-    
+	<div class="column">
+		<div class="footertext">
+			<a style="font-size: 13px; color:#AED6F1; text-decoration:none"><b>ABOUT US</b></a><br>
+			<a href="#"  style="color:#BBEEFE; text-decoration:none">About EE Bank</a><br>
+			<a href="#"  style="color:#BBEEFE; text-decoration:none">Corporate Governance</a><br>
+			<a href="#"  style="color:#BBEEFE; text-decoration:none">CSR</a>
+		</div>
+	</div>
+	<div class="column">
+		<div class="footertext">
+			<a style="font-size: 13px; color:#AED6F1; text-decoration:none"><b>SUPPORTS</b></a><br>
+			<a href="#"  style="color:#BBEEFE; text-decoration:none">Contact Us</a><br>
+			<a href="#"  style="color:#BBEEFE; text-decoration:none">FAQs</a><br>
+			<a href="#"  style="color:#BBEEFE; text-decoration:none">Term of Use</a>
+		</div>
+	</div>
+
+	<div class="column">
+		<div class="footertext">
+			<p style="font-size: 13px; color:#AED6F1;"><b>EE-BANK CALL CENTER</b></p>
+			<p style="font-size: 27px"> XX-XXXX-XXX</p>
+		</div>
+	</div>
+</div>
+
 </body>
 </html>

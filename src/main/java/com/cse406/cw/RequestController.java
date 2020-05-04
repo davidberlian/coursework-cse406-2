@@ -62,81 +62,84 @@ public class RequestController {
     }
     @GetMapping("/request")
     public String request(Model model,HttpServletRequest request, @ModelAttribute Transfer newTransferRequest){
+        try {
+            User user = new User();
+            HttpSession newSession = request.getSession();
+            System.out.println("SESSION DATA" + newSession.getAttribute("token").toString());
+            user.setUsername(newSession.getAttribute("username").toString());
+            user.setToken(newSession.getAttribute("token").toString());
 
-        User user = new User();
-        HttpSession newSession = request.getSession();
-        System.out.println("SESSION DATA" + newSession.getAttribute("token").toString());
-        user.setUsername(newSession.getAttribute("username").toString());
-        user.setToken(newSession.getAttribute("token").toString());
+            if (user.checkToken()) {
 
-        if(user.checkToken()) {
+                if (newTransferRequest != null) {
+                    if (newTransferRequest.getDestination_id() != null
+                            && newTransferRequest.getAmount() > 0) {
 
-            if( newTransferRequest != null) {
-                if(newTransferRequest.getDestination_id() != null
-                        || newTransferRequest.getAmount() >0){
+                        newTransferRequest.setRequester(user.getAccountNumber());
+                        newTransferRequest.setReceiver(newTransferRequest.getDestination_id());
 
-                    newTransferRequest.setRequester(user.getAccountNumber());
-                    newTransferRequest.setReceiver(newTransferRequest.getDestination_id());
+                        if (newTransferRequest.createNewRequest()) {
 
-                    if(newTransferRequest.createNewRequest()){
+                            model.addAttribute("alertClass", "alert2");
+                            model.addAttribute("message", "REQUEST SENT");
+                        } else {
 
-                        model.addAttribute("alertClass", "alert2");
-                        model.addAttribute("message", "REQUEST SENT");
-                    }else{
+                            model.addAttribute("alertClass", "alert");
+                            model.addAttribute("message", "REQUEST FAILED");
+                        }
 
-                        model.addAttribute("alertClass", "alert");
-                        model.addAttribute("message", "REQUEST FAILED");
+                        System.out.println("REQUEST SENT");
                     }
-
-                    System.out.println("REQUEST SENT");
+                } else {
+                    System.out.println("NO REQUEST");
                 }
-            }else{
-                System.out.println("NO REQUEST");
-            }
 
-            Transfer transfer = new Transfer(user.getAccountNumber());
-            ArrayList<String[]> list = transfer.loadRequest();
-            ArrayList<Transfer> listOfRequest = new ArrayList<Transfer>();
+                Transfer transfer = new Transfer(user.getAccountNumber());
+                ArrayList<String[]> list = transfer.loadRequest();
+                ArrayList<Transfer> listOfRequest = new ArrayList<Transfer>();
 
-            for(int i = 0; i<list.size(); i++){
-                String status = "";
-                String name1 = "";
-                if(list.get(i)[0].equals(user.getAccountNumber())) {
+                for (int i = 0; i < list.size(); i++) {
+                    String status = "";
+                    String name1 = "";
+                    if (list.get(i)[0].equals(user.getAccountNumber())) {
 
-                    name1 = "REQUEST SENT TO "+list.get(i)[3];
+                        name1 = "REQUEST SENT TO " + list.get(i)[3];
 
-                   if( list.get(i)[6].equals("0")){
-                       status = "waiting";
-                   }else if( list.get(i)[6].equals("1")){
-                       status = "Received";
-                   }else if( list.get(i)[6].equals("2")) {
-                       status = "Rejected";
-                   }
-                }else {
+                        if (list.get(i)[6].equals("0")) {
+                            status = "waiting";
+                        } else if (list.get(i)[6].equals("1")) {
+                            status = "Received";
+                        } else if (list.get(i)[6].equals("2")) {
+                            status = "Rejected";
+                        }
+                    } else {
 
-                    name1 = "REQUEST FROM "+list.get(i)[2];
+                        name1 = "REQUEST FROM " + list.get(i)[2];
 
-                    if( list.get(i)[6].equals("0")){
-                        status = "option";
-                    }else if( list.get(i)[6].equals("1")){
-                        status = "Sent";
-                    }else if( list.get(i)[6].equals("2")) {
-                        status = "Rejected";
+                        if (list.get(i)[6].equals("0")) {
+                            status = "option";
+                        } else if (list.get(i)[6].equals("1")) {
+                            status = "Sent";
+                        } else if (list.get(i)[6].equals("2")) {
+                            status = "Rejected";
+                        }
                     }
+                    listOfRequest.add(new Transfer(list.get(i)[0], list.get(i)[1],
+                            name1, list.get(i)[3],
+                            list.get(i)[4], list.get(i)[5],
+                            status, list.get(i)[7], Integer.parseInt(list.get(i)[8])));
                 }
-                listOfRequest.add(new Transfer(list.get(i)[0],list.get(i)[1],
-                            name1,list.get(i)[3],
-                            list.get(i)[4],list.get(i)[5],
-                            status ,list.get(i)[7], Integer.parseInt(list.get(i)[8])));
+
+                model.addAttribute("user", user);
+                model.addAttribute("newTransferRequest", new Transfer(user.getAccountNumber()));
+                model.addAttribute("listOfRequest", listOfRequest);
+
+                return "request";
+            } else {
+                return "redirect:/login";
             }
-
-            model.addAttribute("user", user);
-            model.addAttribute("newTransferRequest", new Transfer(user.getAccountNumber()));
-            model.addAttribute("listOfRequest", listOfRequest);
-
-            return "request";
-        }else{
-            return "redirect:/login";
+        }catch (Exception e){
+            return "redirect:/home";
         }
     }
 }

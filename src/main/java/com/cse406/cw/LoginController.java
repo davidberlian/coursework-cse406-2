@@ -235,14 +235,15 @@ public class LoginController {
 	
 
 	@PostMapping("/signup")
-	public String signup_check(Model model, @ModelAttribute Signup user) {	
+	public String signup_check(Model model, @ModelAttribute Signup user, RedirectAttributes redirectAttributes) {
 		System.out.println(user.getPassword()+"POST MAPPING");
 		if(user.checkfield()) {
 			if(user.validate()) {
 				model.addAttribute("user", new Signup());
-				System.out.println("Success");	 
-				model.addAttribute("message", "Registration success please login!");  
-				return "login";
+				System.out.println("Success");
+				redirectAttributes.addFlashAttribute("message", "Registration success please login!");
+				redirectAttributes.addFlashAttribute("alert","alert2");
+				return "redirect:/login";
 			}else {
 				model.addAttribute("user", new Signup());
 				System.out.println("Failed");	 
