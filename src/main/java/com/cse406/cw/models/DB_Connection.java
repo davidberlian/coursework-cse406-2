@@ -151,6 +151,7 @@ public class DB_Connection{
 			     System.out.println("Error: No active Connection");
 			 }
 		 } catch (Exception e) {
+	    	 closeConnection();
 			     e.printStackTrace();
 		 }
 		 return false;
@@ -189,6 +190,8 @@ public class DB_Connection{
 			 }
 		     return anotherList;
 		 } catch (Exception e) {
+
+	    	 closeConnection();
 			     e.printStackTrace();
 		 }
 		 return anotherList;

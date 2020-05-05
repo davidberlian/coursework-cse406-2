@@ -85,7 +85,7 @@ public class RequestController {
                         } else {
 
                             model.addAttribute("alertClass", "alert");
-                            model.addAttribute("message", "REQUEST FAILED");
+                            model.addAttribute("message", "REQUEST FAILED pleaase use correct information");
                         }
 
                         System.out.println("REQUEST SENT");

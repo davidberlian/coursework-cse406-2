@@ -244,6 +244,9 @@ public class Transfer {
     public boolean createNewRequest(){
         try{
             DB_Connection conn = new DB_Connection();
+            this.destination_id = this.receiver;
+            if( !checkDestination()) return false;
+            
             String query = "INSERT INTO transaction_request (savings_id, destination_id, transaction_amount, transaction_message) VALUES "+
                                 "('"+this.requester+"','"+this.receiver+"','"+this.amount+"','"+this.message+"')";
             System.out.println(query);
