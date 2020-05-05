@@ -50,6 +50,15 @@ button:hover {
 
 .container {
 	padding: 2px; 
-	background: light grey; 
+	background-color: rgb(192, 192, 192)ht grey;
+	style: "font-size: 13px; 
+
+}
+
+
+.header {
+ 	background-color: white; 
+ 	padding: 130px;	
+	
 	
 }

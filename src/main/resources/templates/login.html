@@ -33,7 +33,7 @@
 			<i class="fas fa-lock"></i>
 			<input type="password"placeholder="Enter  Password" th:field="*{password}" />
 
-			<p style="font-size:60%"> <span class="psw" style= "color: royalblue"> <a href="forgot">Forgot Password</a></span></p>
+			<p style="font-size:60%"> <span class="psw" style= "color: royalblue"> <a th:href="@{/forgot}">Forgot Password</a></span></p>
 			<button type="submit" style="font-size:80%"><b>L o g i n</b></button>
 
 		</form>
@@ -47,7 +47,7 @@
 	</div>
 </div>
 
-<div class="container" style="background-color:white; padding: 50px"> </div>
+<div class="container" style="background-color:white; padding: 50px"> 
 <hr>
 <div class="row">
 	<div class="column">
@@ -81,6 +81,7 @@
 			<p style="font-size: 27px"> XX-XXXX-XXX</p>
 		</div>
 	</div>
+</div> 
 </div>
 
 </body>
