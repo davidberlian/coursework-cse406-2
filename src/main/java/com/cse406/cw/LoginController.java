@@ -42,6 +42,7 @@ public class LoginController {
 	@GetMapping("/login")
 	public String login(Model model) {
 		model.addAttribute( "message" ,model.asMap().get("message"));
+		model.addAttribute( "alert" ,model.asMap().get("alert"));
 	    model.addAttribute("user", new User());
 		return "login";
 	}
@@ -120,7 +121,8 @@ public class LoginController {
 		try{
 			if(user.checkForgotToken() && user.getPassword().equals(user.getPassword2())){
 				user.disolveToken();
-				user.updatePassword();redirectAttrs.addFlashAttribute("alert","alert2");
+				user.updatePassword();
+				redirectAttrs.addFlashAttribute("alert","alert2");
 				redirectAttrs.addFlashAttribute("message","your password has been successfully updated");
 				return "redirect:/login";
 			}else{redirectAttrs.addFlashAttribute("alert","alert");
@@ -220,7 +222,7 @@ public class LoginController {
 		    message.setSubject("Reset Account");
 		 
 		    //set the content of the email message
-		    message.setContent("click here <a href=\"http://localhost:8080/cw_war/resetpassword\" >here</a> Your token is "+token, "text/html");
+		    message.setContent("click here <a href=\"http://davidberlian.com:8080/cw/resetpassword\" >here</a> Your token is "+token, "text/html");
 
 		    //send the email message
 		    Transport.send(message);
@@ -241,7 +243,7 @@ public class LoginController {
 			if(user.validate()) {
 				model.addAttribute("user", new Signup());
 				System.out.println("Success");
-				redirectAttributes.addFlashAttribute("message", "Registration success please login!");
+				redirectAttributes.addFlashAttribute("message", "Registration success please login!!");
 				redirectAttributes.addFlashAttribute("alert","alert2");
 				return "redirect:/login";
 			}else {

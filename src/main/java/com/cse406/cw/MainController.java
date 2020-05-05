@@ -53,7 +53,8 @@ public class MainController {
 	public String createaccount(Model model, @ModelAttribute dummyAccount dummyAccount) {
 		System.out.println("HAHAHHAHAasdadadsH"+dummyAccount.getLast_name());
 		if(dummyAccount.checkAccount() && dummyAccount.submit()) {
-			System.out.println("Success");	 
+			System.out.println("Success");	
+			
 			model.addAttribute("message", "new ACCOUNT CREATED success please registrate ONLINE BANKING!");  
 			return "createacc";
 		}else {
