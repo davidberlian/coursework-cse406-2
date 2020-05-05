@@ -42,6 +42,7 @@ public class LoginController {
 	@GetMapping("/login")
 	public String login(Model model) {
 		model.addAttribute( "message" ,model.asMap().get("message"));
+		model.addAttribute( "alert" ,model.asMap().get("alert"));
 	    model.addAttribute("user", new User());
 		return "login";
 	}
@@ -120,7 +121,8 @@ public class LoginController {
 		try{
 			if(user.checkForgotToken() && user.getPassword().equals(user.getPassword2())){
 				user.disolveToken();
-				user.updatePassword();redirectAttrs.addFlashAttribute("alert","alert2");
+				user.updatePassword();
+				redirectAttrs.addFlashAttribute("alert","alert2");
 				redirectAttrs.addFlashAttribute("message","your password has been successfully updated");
 				return "redirect:/login";
 			}else{redirectAttrs.addFlashAttribute("alert","alert");
@@ -205,6 +207,7 @@ public class LoginController {
 	    }
 	         });
 
+
 	      try {
 	    //create a MimeMessage object
 	    Message message = new MimeMessage(session);
@@ -245,7 +248,7 @@ public class LoginController {
 			if(user.validate()) {
 				model.addAttribute("user", new Signup());
 				System.out.println("Success");
-				redirectAttributes.addFlashAttribute("message", "Registration success please login!");
+				redirectAttributes.addFlashAttribute("message", "Registration success please login!!");
 				redirectAttributes.addFlashAttribute("alert","alert2");
 				return "redirect:/login";
 			}else {

@@ -3,14 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Home: Internet Banking</title>
-<script src="https://kit.fontawesome.com/6e68db03e6.js"
-	crossorigin="anonymous"></script>
-<link rel="stylesheet" type="text/css"
-	th:href="@{/resources/css/home.css}" />
-<link rel="stylesheet" type="text/css"
-	th:href="@{/resources/css/sidebar.css}" />
-<link rel="stylesheet" type="text/css"
-	th:href="@{/resources/css/insideApplication.css}" />
+<script src="https://kit.fontawesome.com/6e68db03e6.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" th:href="@{/resources/css/home.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/resources/css/sidebar.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/resources/css/insideApplication.css}" /> 
+<link rel="stylesheet" type="text/css" th:href="@{/resources/css/footer.css}"/>
+	
 </head>
 
 <body> 
@@ -59,30 +57,70 @@
 
 		<br>
 		
-		<div >
-		<h2>This is the personal page</h2>
-		
-			<p th:text="'Username:  ' + ${user.username}" /> 
-		 	<br>
-		 	<!-- <p th:text="'Full Name:  ' + ${user.fullName}  /> -->
-		 	
-		 	<br> 
-		 	<!-- <p th:text="'Account Number:  ' + ${user.accountNumber  />    
-		 	<br> 
-		 	<p> Age: xx </p> 
-		 	<br>
-		 	<p> You joined xx/xx/xxxx </p>
-		 	<br> --> 
-		 	
-		 	
 		 
-		</div>
-		 
-		 
-		 
-		
+	
+	
+	<div class="container" style="background-color:#AED6F1;" >
+	<center>
+		<p style="font-size:250%;  letter-spacing: 4px; color: royalblue">Personal Page</p>
+	</center>
+				<left>
+						<div class="row" >
+				
+							<p th:text="'Current Name:  ' + ${user.username}" />
+							<br>
+							<p> You joined xx/xx/xxxx </p> 
+							
+							<br> 
+							<p> Age: xx </p>   
+							<br> 
+							
+							
+						</div>
+				</left>
+		</div> 
+	
+	
 
-	</div>
+
+	<div class= "header" " ></div>
+	<hr>
+		<div class="row">
+			<div class="column">
+				<div class="footertext">
+					<a style="font-size: 13px; color:#AED6F1; text-decoration:none"><b>OUR PRODUCT</b></a><br>
+					<a href="#"  style="color:#BBEEFE; text-decoration:none">Loans</a><br>
+					<a href="#"  style="color:#BBEEFE; text-decoration:none">Cards</a><br>
+					<a href="#"  style="color:#BBEEFE; text-decoration:none">Digital Banking</a>
+				</div>
+			</div>
+			<div class="column">
+				<div class="footertext">
+					<a style="font-size: 13px; color:#AED6F1; text-decoration:none"><b>ABOUT US</b></a><br>
+					<a href="#"  style="color:#BBEEFE; text-decoration:none">About EE Bank</a><br>
+					<a href="#"  style="color:#BBEEFE; text-decoration:none">Corporate Governance</a><br>
+					<a href="#"  style="color:#BBEEFE; text-decoration:none">CSR</a>
+				</div>
+			</div>
+			<div class="column">
+				<div class="footertext">
+					<a style="font-size: 13px; color:#AED6F1; text-decoration:none"><b>SUPPORTS</b></a><br>
+					<a href="#"  style="color:#BBEEFE; text-decoration:none">Contact Us</a><br>
+					<a href="#"  style="color:#BBEEFE; text-decoration:none">FAQs</a><br>
+					<a href="#"  style="color:#BBEEFE; text-decoration:none">Term of Use</a>
+				</div>
+			</div>
+	
+			<div class="column">
+				<div class="footertext">
+					<p style="font-size: 13px; color:#AED6F1;"><b>EE-BANK CALL CENTER</b></p>
+					<p style="font-size: 27px"> XX-XXXX-XXX</p>
+				</div>
+			</div>
+		</div>
+
+</div>
+
 
 
 </body>
