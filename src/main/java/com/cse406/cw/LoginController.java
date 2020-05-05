@@ -169,70 +169,74 @@ public class LoginController {
 	}
 
 	public Boolean sendMail(String email, String token) throws UnknownHostException, SocketException {
-		      //provide recipient's email ID
-		      String to = email;
+	      //provide recipient's email ID
+	      String to = email;
 
-		      //provide sender's email ID
-				String from = "davidberlian.com";
-				try(final DatagramSocket socket = new DatagramSocket()){
-				  socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
-				  from = socket.getLocalAddress().getHostAddress();
-				}
+	      //provide sender's email ID
+			String from = "davidberlian.com";
+			try(final DatagramSocket socket = new DatagramSocket()){
+			  socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
+			  from = socket.getLocalAddress().getHostAddress();
+			}
 
-		//provide Mailtrap's username
-		// final String username = "4d805ec5e82105";
-		//provide Mailtrap's password
-		//final String password = "0d4a8b2d3939e8";
-		//provide Mailtrap's username
-		final String username = "eebankcse406@gmail.com";
-		//provide Mailtrap's password
-		final String password = "D.berlian19@";
+	//provide Mailtrap's username
+	// final String username = "4d805ec5e82105";
+	//provide Mailtrap's password
+	//final String password = "0d4a8b2d3939e8";
+	//provide Mailtrap's username
+	final String username = "eebankcse406@gmail.com";
+	//provide Mailtrap's password
+	final String password = "D.berlian19@";
 
-		      //provide Mailtrap's host address 
-		      String host = "smtp.gmail.com";
-		      //configure Mailtrap's SMTP server details 
-		      Properties props = new Properties();
-		      props.put("mail.smtp.auth", "true");
-		      props.put("mail.smtp.starttls.enable", "true");  
-		      props.put("mail.smtp.host", host);
-		      props.put("mail.smtp.port", "587");
+	      //provide Mailtrap's host address 
+	      String host = "smtp.gmail.com";
+	      //configure Mailtrap's SMTP server details 
+	      Properties props = new Properties();
+	      props.put("mail.smtp.auth", "true");
+	      props.put("mail.smtp.starttls.enable", "true");  
+	      props.put("mail.smtp.host", host);
+	      props.put("mail.smtp.port", "587");
 
-		      //create the Session object
-		      Session session = Session.getInstance(props,
-		         new javax.mail.Authenticator() {
-		            protected PasswordAuthentication getPasswordAuthentication() {
-		               return new PasswordAuthentication(username, password);
-		    }
-		         });
+	      //create the Session object
+	      Session session = Session.getInstance(props,
+	         new javax.mail.Authenticator() {
+	            protected PasswordAuthentication getPasswordAuthentication() {
+	               return new PasswordAuthentication(username, password);
+	    }
+	         });
 
-		      try {
-		    //create a MimeMessage object
-		    Message message = new MimeMessage(session);
-		 
-		    //set From email field 
-		    message.setFrom(new InternetAddress(from));
-		 
-		    //set To email field
-		    message.setRecipients(Message.RecipientType.TO,
-		               InternetAddress.parse(to));
-		 
-		    //set email subject field
-		    message.setSubject("Reset Account");
-		 
-		    //set the content of the email message
-		    message.setContent("click here <a href=\"http://localhost:8080/cw_war/resetpassword\" >here</a> Your token is "+token, "text/html");
+	      try {
+	    //create a MimeMessage object
+	    Message message = new MimeMessage(session);
+	 
+	    //set From email field 
+	    message.setFrom(new InternetAddress(from));
+	 
+	    //set To email field
+	    message.setRecipients(Message.RecipientType.TO,
+	               InternetAddress.parse(to));
+	 
+	    //set email subject field
+	    message.setSubject("Reset Account");
+	 
+	    //set the content of the email message
+	    message.setContent(
+	    		"<center><img src= \"http://davidberlian.com:8080/cw/resources/img/logo.png\" alt=\"logo\" style=\"width:160px; height:100 px\"></center>"+
+	    		"Did you forget your password? <br> Don't worry, we can help you. You can set your new password <a href=\"http://localhost:8080/cw_war/resetpassword\" >here</a>. <br>"+
+	    		"Your token is "+token+
+	    		"<br>Thank you, <br> EE Bank Technical Support"+
+	    		"<hr> Thank you for choosing EE Bank's service<br> For further information please contact xx-xxx-xxxx", "text/html");
 
-		    //send the email message
-		    Transport.send(message);
+	    //send the email message
+	    Transport.send(message);
 
-		    System.out.println("Email Message Sent Successfully");
-		    	return true;
-		      } catch (MessagingException e) {
-		    	  e.printStackTrace();
-		        return false;
-		      }
-		   }
-	
+	    System.out.println("Email Message Sent Successfully");
+	    	return true;
+	      } catch (MessagingException e) {
+	    	  e.printStackTrace();
+	        return false;
+	      }
+	   }
 
 	@PostMapping("/signup")
 	public String signup_check(Model model, @ModelAttribute Signup user, RedirectAttributes redirectAttributes) {
