@@ -43,28 +43,6 @@ public class MainController {
 
 	}
 
-	@GetMapping("/createaccount")
-	public String login(Model model) {
-		System.out.println("HAHAHHAHAH");
-		model.addAttribute("dummyAccount", new dummyAccount());
-		return "createacc";
-	}
-	@PostMapping("/createaccount")
-	public String createaccount(Model model, @ModelAttribute dummyAccount dummyAccount) {
-		System.out.println("HAHAHHAHAasdadadsH"+dummyAccount.getLast_name());
-		if(dummyAccount.checkAccount() && dummyAccount.submit()) {
-			System.out.println("Success");	
-			
-			model.addAttribute("message", "new ACCOUNT CREATED success please registrate ONLINE BANKING!");  
-			return "createacc";
-		}else {
-			model.addAttribute("dummyAccount", new dummyAccount());
-			System.out.println("Failed");	 
-			model.addAttribute("message", "Invalid information please try again");  
-			return "createacc";
-		}		
-	}
-	
 	@GetMapping("/home")
 	public String home(Model model, HttpServletRequest request) {
 		try {

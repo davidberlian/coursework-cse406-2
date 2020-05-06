@@ -82,7 +82,10 @@ public class LoginController {
 
 	@GetMapping("/logout")
 	public String logout(Model model, HttpServletRequest request) {
+		User user = new User();
 		HttpSession newSession = request.getSession(); // create session
+		user.setUsername(newSession.getAttribute("username").toString());
+		user.removeToken(1);
 		newSession.invalidate();
 		return "index";
 	}

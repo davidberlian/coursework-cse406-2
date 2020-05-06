@@ -20,12 +20,12 @@
 </div>
 
 <center>
-	<h1>Create an Account</h1>
+	<h1>Create a new Saving Account</h1>
 </center>
 
 <div class="box">
 	<div th:if="${message}" th:text="${message}" th:class="${'alert ' + alertClass}"></div>
-	<form action="#" th:action="@{/createaccount}" th:object="${dummyAccount}" method="post">
+	<form action="#" th:action="@{/adminhome}" th:object="${dummyAccount}" method="post">
 		<p>First Name: 			<input type="text" th:field="*{first_name}"/></p>
 		<p>Last Name: 			<input type="text" th:field="*{last_name}" /></p>
 		<p>Date of Birth		<input type="date" placeholder="Date Of Birth" th:field="*{dob}" /></p>

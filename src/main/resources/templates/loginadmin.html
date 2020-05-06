@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+	<title>Login Admin</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/login.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/alert.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/footer.css}"/>
+	<link rel="icon" th:href="@{/resources/img/logo_only.png}" type="image/gif" sizes="16x16">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<script src="https://kit.fontawesome.com/6e68db03e6.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+<center>
+	<a th:href="@{/logout}" class="logo"> <span><img th:src="@{/resources/img/logo.png}" style="width:150px;height:45px" /></span></a>
+</center>
+
+<div class="container" style="background-color:white">
+	<center>
+		<p style="font-size:250%;  letter-spacing: 4px; color: royalblue">EE Bank</p>
+		<p style="font-size:95%;  letter-spacing: 2px";>Admin Login</p><br>
+	</center>
+	<div class="box" style="width:50%">
+		<form action="#" th:action="@{/admin}" th:object="${user}" method="post">
+
+			<div th:class="${alert}" th:if="${message}" >
+				<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+				<p th:text="${message}"/>
+			</div>
+			<br>
+			<i class="fas fa-user"></i>
+			<input type="text" placeholder="Enter User name" th:field="*{username}" />
+			<i class="fas fa-lock"></i>
+			<input type="password"placeholder="Enter  Password" th:field="*{password}" />
+
+			<button type="submit" style="font-size:80%"><b>L o g i n</b></button>
+
+		</form>
+
+	</div>
+</div>
+
+</body>
+</html>

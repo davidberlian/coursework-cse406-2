@@ -86,7 +86,7 @@ public class User {
 		}
 		return 0D;
 	}
-	
+
 	
 	public Boolean check_password(){
 		System.out.println("EXECUTE SQL");
@@ -101,9 +101,40 @@ public class User {
 				System.out.println(Response.get(0)[1]);
 				if(Response.get(0)[1].equals(this.password)) {
 					this.password ="";
-					if(updateToken()) {
+					if(updateToken(1)) {
 						return true;
 					}
+				}
+			}
+			return false;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public Boolean check_admin_password(){
+		System.out.println("EXECUTE SQL");
+		try {
+			DB_Connection conn = new DB_Connection();
+			ArrayList<String[]> Response= conn.read_query("SELECT * FROM admin WHERE username='"+this.username+"'",new String[]{"username","password"});
+			System.out.println("CHECK _ ADMIN_ PASSWORD ");
+			if(Response.isEmpty()) {
+				System.out.println("not found");
+				return false;
+			}else {
+				System.out.println("found");
+				System.out.println(Response.get(0)[1]);
+				if(Response.get(0)[1].equals(this.password)) {
+					System.out.println("correct password");
+					this.password ="";
+					if(updateToken(0)) {
+
+						System.out.println("updaete token password");
+						return true;
+					}
+				}else {
+					System.out.println("wrong password");
 				}
 			}
 			return false;
@@ -135,7 +166,28 @@ public class User {
 		}
 	}
 	
-	public Boolean updateToken() {
+	public Boolean checkTokenAdmin() {
+
+		conn = new DB_Connection();
+		
+		// remove all old token
+		
+		String query = "SELECT * FROM `token_admin` JOIN admin ON admin.username = token_admin.username "
+				+ "  WHERE token_admin.id = '"+this.token+
+				"' AND active = true";
+		
+		System.out.println(query);
+		
+		ArrayList<String[]> result = conn.read_query(query, new String[] {});
+			
+		if(!result.isEmpty()) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+
+	public Boolean updateToken(int i) {
 		 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
 		   LocalDateTime now = LocalDateTime.now();  
 			   
@@ -147,16 +199,24 @@ public class User {
 			conn = new DB_Connection();
 			
 			// remove all old token
-		
-	
-			Boolean result = conn.write_query("UPDATE `token` SET `active`=false WHERE username='"+username+"'"
+			Boolean result = false;
+			if(i == 1) {
+			result = conn.write_query("UPDATE `token` SET `active`=false WHERE username='"+username+"'"
 					);
-			
 			
 			result = conn.write_query("INSERT INTO  `token`(`id`, `username`) VALUES ('"+temp_token+
 			"','"+username+"')"
 			);
-			
+			}else {
+				String query = "UPDATE `token_admin` SET `active`=false WHERE username='"+username+"'";
+						
+				result = conn.write_query(query);
+
+				System.out.println(query);
+				result = conn.write_query("INSERT INTO  `token_admin`(`id`, `username`) VALUES ('"+temp_token+
+				"','"+username+"')"
+				);
+			}		
 		   
 		if(result) {
 			System.out.println("156 true");
@@ -168,11 +228,19 @@ public class User {
 		}
 	}
 	
-	public void removeToken() {
+	public void removeToken(int i) {
 		System.out.println("IM HERE + "+username);
 		this.token = null;
 		conn = new DB_Connection();
-		Boolean result = conn.write_query("UPDATE `token` SET `active`=false WHERE username='"+username+"'");
+		Boolean result = false;
+		if(i == 1) {
+			
+			result = conn.write_query("UPDATE `token` SET `active`=false WHERE username='"+username+"'");
+			
+		}else {
+			result = conn.write_query("UPDATE `token_admin` SET `active`=false WHERE username='"+username+"'");
+			
+		}
 		if(result) {
 			System.out.println("woked + "+username);
 		}else {
