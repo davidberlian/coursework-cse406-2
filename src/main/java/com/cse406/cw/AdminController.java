@@ -100,5 +100,16 @@ public class AdminController {
 			return "redirect:/admin";
 		}
 	}
+	@GetMapping("/logoutadmin")
+	public String adminlogout(Model model, @ModelAttribute dummyAccount dummyAccount, HttpServletRequest request) {
+		
+		HttpSession newSession = request.getSession();
+				User user = new User();
+				user.setUsername(newSession.getAttribute("username").toString());
+				user.removeToken(0);
+				newSession.invalidate();
+		return "redirect:/admin";
+		
+	}
 	
 }
