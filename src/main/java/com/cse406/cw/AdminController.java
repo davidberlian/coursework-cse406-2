@@ -84,7 +84,7 @@ public class AdminController {
 				if(dummyAccount.checkAccount() && dummyAccount.submit()) {
 					System.out.println("Success");	
 					model.addAttribute("dummyAccount", new dummyAccount());
-					model.addAttribute("message", "new ACCOUNT CREATED success please registrate ONLINE BANKING!");  
+					model.addAttribute("message", "New ACCOUNT CREATED success please registrate ONLINE BANKING!");  
 					return "createacc";
 				}else {
 					model.addAttribute("dummyAccount", new dummyAccount());
