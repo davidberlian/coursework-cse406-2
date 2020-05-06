@@ -12,6 +12,7 @@ public class Transfer {
     private Double amount;
     private String amountCurr;
     private String message;
+    public int lastTransactionId;
 
     public int getId() {
         return id;
@@ -278,6 +279,12 @@ public class Transfer {
                 System.out.println(query);
                 Response = conn.write_query(query);
                 if(Response){
+                	
+                	query = "SELECT id FROM transaction WHERE savings_id ='"+this.accountNumber+"' ORDER BY transaction_time DESC LIMIT 1";
+                	ArrayList<String[]> id= conn.read_query(
+                              query
+                              ,new String[]{"id"});
+                    this.lastTransactionId = Integer.parseInt(id.get(0)[0]);
                     query = "UPDATE savings SET total_savings = total_savings +"+ this.amount +" WHERE id = '"+this.destination_id+"'";
                     System.out.println(query);
                     Response = conn.write_query(query);

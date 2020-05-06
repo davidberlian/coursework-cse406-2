@@ -31,7 +31,10 @@
     <div class="header">
         <a th:href="@{/home}" class="logo"> <span><img th:src="@{/resources/img/logo.png}"style="width:155px;height:45px" /></span></a>
         <div class="header-right">
-            <p th:text="Request" />
+            <form action="#" th:action="@{/logout}">
+				<button type="submit" class="pull-right" style = "border: 1pxl; background: white; color: #FC5A5A; font-size:250%">
+					<i class="fas fa-sign-out-alt"></i></button>
+			</form>
         </div>
     </div>
     <div class="header" style="background: rgb(24,187,217); background: linear-gradient(90deg, rgba(24,187,217,1) 0%, rgba(76,184,243,1) 59%, rgba(201,162,242,1) 100%)"> </div>
@@ -39,12 +42,6 @@
     <div class="w3-container">
         <div class="row">
             <h2>Account Information</h2>
-        </div>
-
-        <div class="img" >
-            <img th:src="@{/resources/img/balance.png}" alt="balance" style="width:300px;height:250px">
-            <div class="topcentered" style="color: #4F4E56">Cash Balance</div>
-            <div class="centered" style="color: #4F4E56; font-size:350%"><p th:text="'$' + ${user.savings}" /></div>
         </div>
 
 
@@ -65,6 +62,11 @@
                 <tr>
                     <td>Currency</td>
                     <td>USD</td>
+                </tr>
+                
+                <tr>
+                    <td>Current Balance</td>
+                    <td th:text="${userBalance}"></td>
                 </tr>
             </table>
         </div>

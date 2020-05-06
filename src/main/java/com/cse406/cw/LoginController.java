@@ -225,7 +225,8 @@ public class LoginController {
 	    //set the content of the email message
 	    message.setContent(
 	    		"<center><img src= \"http://davidberlian.com:8080/cw/resources/img/logo.png\" alt=\"logo\" style=\"width:160px; height:100 px\"></center>"+
-	    		"Did you forget your password? <br> Don't worry, we can help you. You can set your new password <a href=\"http://localhost:8080/cw_war/resetpassword\" >here</a>. <br>"+
+	    		"Did you forget your password? <br> Don't worry, we can help you. You can set your new "
+	    		+ "password <a href=\"http://davidberlian.com:8080/cw/resetpassword\" >here</a>. <br>"+
 	    		"Your token is "+token+
 	    		"<br>Thank you, <br> EE Bank Technical Support"+
 	    		"<hr> Thank you for choosing EE Bank's service<br> For further information please contact xx-xxx-xxxx", "text/html");

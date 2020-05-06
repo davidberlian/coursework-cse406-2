@@ -27,7 +27,7 @@ public class TransactionController {
 
     @GetMapping("/transaction")
     public String transaction(Model model, HttpServletRequest request, @RequestParam(defaultValue = "") String month) {
-
+    	try {
         User user = new User();
         HttpSession newSession = request.getSession();
         System.out.println("SESSION DATA" + newSession.getAttribute("token").toString());
@@ -37,6 +37,9 @@ public class TransactionController {
         if(user.checkToken()) {
 
             model.addAttribute("user", user);
+			NumberFormat format = NumberFormat.getCurrencyInstance(Locale.US);
+			String userBalance = format.format(user.getSavings());			
+			model.addAttribute("userBalance", userBalance);
 
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM");
             LocalDateTime picked = null;
@@ -58,7 +61,7 @@ public class TransactionController {
             list = Transaction.loadTransaction(user.getUsername(), picked.format(dtf));
 
             ArrayList<Transaction> listOfTransaction= new ArrayList<Transaction>();
-            NumberFormat format = NumberFormat.getCurrencyInstance(Locale.US);
+            format = NumberFormat.getCurrencyInstance(Locale.US);
 
             ArrayList<Month> listOfMonth = new ArrayList<Month>();
             LocalDateTime currentdate = LocalDateTime.now();
@@ -98,6 +101,7 @@ public class TransactionController {
             model.addAttribute("totalCredit",format.format(totalCredit));
             model.addAttribute("currentBalance",format.format(currentBalance));
 
+			
             return "transaction";
 
         }else {
@@ -105,7 +109,11 @@ public class TransactionController {
             model.addAttribute("message", "Please Login!");
             model.addAttribute("user", new User());
             newSession.invalidate();
-            return "login";
+            return "redirect:/login";
         }
+    	}catch(Exception e) {
+    		return "redirect:/login";
+    	}
+    	
     }
 }

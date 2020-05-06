@@ -12,6 +12,8 @@
     <link rel="stylesheet" type="text/css" th:href="@{/resources/css/transaction.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/resources/css/sidebar.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/resources/css/footer.css}"/>
+   <link rel="stylesheet" type="text/css" th:href="@{/resources/css/home.css}"/>
+	
     <title>Transaction</title>
 
 </head>
@@ -26,25 +28,23 @@
 
 <div class = "main">
 
-    <div class="header">
-        <a th:href="@{/home}" class="logo"> <span><img th:src="@{/resources/img/logo.png}"style="width:155px;height:45px" /></span></a>
-        <div class="header-right">
-            <p th:text="Transaction" />
-        </div>
-    </div>
-
+	<div class="header">
+		
+			<a th:href="@{/home}" class="logo"> <span><img th:src="@{/resources/img/logo.png}"style="width:155px;height:45px" /></span></a>
+		
+		<div class="header-right">
+			<form action="#" th:action="@{/logout}">
+				<button type="submit" class="pull-right" style = "border: 1pxl; background: white; color: #FC5A5A; font-size:250%">
+					<i class="fas fa-sign-out-alt"></i></button>
+			</form>
+		</div>	
+			
+	</div>
 
     <div class="w3-container">
         <div class="row">
             <h2>Account Information</h2>
         </div>
-
-        <div class="img">
-            <img th:src="@{/resources/img/balance.png}" alt="balance" style="width:300px;height:250px">
-            <div class="topcentered" style="color: #4F4E56">Cash Balance</div>
-            <div class="centered" style="color: #4F4E56; font-size:350%"><p th:text="'$' + ${user.savings}" /></div>
-        </div>
-
 
         <div class="w3-container">
 
@@ -64,6 +64,10 @@
                     <td>Currency</td>
                     <td>USD</td>
                 </tr>
+                <tr>
+                    <td>Current Balance</td>
+                    <td th:text="${userBalance}"></td>
+                </tr>
             </table>
         </div>
 
@@ -75,48 +79,47 @@
     <div class="w3-container">
         <h2>Account Statement</h2>
         <form th:action="@{/transaction}" method="get">
-            <label for="cars">Choose a month:</label>
+            <label for="cars">View Transaction on</label>
             <select id="month" name="month" >
                 <option th:each="option : ${options}" th:value="${option.id}" th:text="${option.text}"></option>
             </select>
             <input type="submit">
         </form>
-        <b><td th:text=${period}></td></b>
         <hr>
         Summary
         <table class="w3-table-all w3-hoverable">
             <thead>
+            
+            <tr>
+                <td>Transaction Period</td>
+                <td>:</td> <td></td>
+                <td class="w3-right-align" th:text=${period}></td>
+            </tr>
             <tr>
                 <td>Starting Balance</td>
-                <td>:</td>
+                <td>:</td><td></td>
                 <td class="w3-right-align" th:text="${startingBalance}"></td>
-                <td></td>
+                
             </tr>
             <tr>
                 <td>Total Credit</td>
-                <td>:</td>
+                <td>:</td> <td></td>
                 <td class="w3-right-align" th:text="${totalCredit}"></td>
-                <td></td>
+               
             </tr>
             <tr>
                 <td>Total Debit</td>
-                <td>:</td>
+                <td>:</td>  <td></td>
                 <td class="w3-right-align" th:text="${totalDebit}"></td>
-                <td></td>
+              
             </tr>
             <tr>
                 <td>Ending Balance</td>
-                <td>:</td>
+                <td>:</td> <td></td>
                 <td class="w3-right-align" th:text="${currentBalance}"></td>
-                <td></td>
+                
             </tr>
 
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
             </thead>
         </table>
         <br>

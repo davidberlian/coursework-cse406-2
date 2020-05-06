@@ -12,7 +12,9 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.lang.reflect.Array;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 @Controller
 public class RequestController {
@@ -71,6 +73,12 @@ public class RequestController {
 
             if (user.checkToken()) {
 
+				NumberFormat format = NumberFormat.getCurrencyInstance(Locale.US);
+				String userBalance = format.format(user.getSavings());
+				model.addAttribute("userBalance", userBalance);
+                model.addAttribute("user", user);
+                
+                
                 if (newTransferRequest != null) {
                     if (newTransferRequest.getDestination_id() != null
                             && newTransferRequest.getAmount() > 0) {
@@ -130,7 +138,6 @@ public class RequestController {
                             status, list.get(i)[7], Integer.parseInt(list.get(i)[8])));
                 }
 
-                model.addAttribute("user", user);
                 model.addAttribute("newTransferRequest", new Transfer(user.getAccountNumber()));
                 model.addAttribute("listOfRequest", listOfRequest);
 
