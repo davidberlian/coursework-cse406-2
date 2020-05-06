@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Transfer Confirmation Receipt</title>
+	<link rel="icon" th:href="@{/resources/img/logo_only.png}" type="image/gif" sizes="16x16">
 	<script src="https://kit.fontawesome.com/6e68db03e6.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/alert.css}"/>
@@ -26,43 +27,45 @@
 			<i class="fas fa-check-circle"></i><br>
 			<b>Success!</b> Your transfer has been completed </p></center>
 
-		<div class="box" style="border: 3px solid #ACF3A6 ; width: 70%;">
-			<img th:src="@{/resources/img/logo_only.png}" alt="logo" style="width:100%; opacity:0.2">
-			<div class="centered" style="top:70%">
-				<table class="table">
-					<thead>
-					<td></td>
-					</thead>
-					<tr>
-						<td><b>From Account</b></td>
-						<td th:text=${transfer.accountNumber}></td>
-					</tr>
-
-					<tr><td></td><td></td></tr>
-					<tr>
-						<td><b>To Account</b></td>
-						<td th:text=${transfer.destination_id}></td>
-					</tr>
-					<tr>
+		<div class="box" style="border: 3px solid #ACF3A6; width: 70%;">
+				<center><img th:src="@{/resources/img/logo_only.png}" alt="logo" style="width:40px; height:40 px"></center>
+					<table class="table">
+						<thead>
 						<td></td>
-						<td th:text=${transfer.fullName}></td>
-					</tr>
-					<tr>
-						<td><b>Amount</b></td>
-						<td th:text=${transfer.amountCurr}></td>
-					</tr>
+						</thead>
+						<tr>
+							<td><b>From Account</b></td>
+							<td th:text=${transfer.accountNumber}></td>
+						</tr>
 
-					<tr><td></td><td></td></tr>
-					<tr>
-						<td><b>Remark</b></td>
-						<td th:text=${transfer.message}></td>
-					</tr>
+						<tr><td></td><td></td></tr>
+						<tr>
+							<td><b>To Account</b></td>
+							<td th:text=${transfer.destination_id}></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td th:text=${transfer.fullName}></td>
+						</tr>
+						<tr>
+							<td><b>Amount</b></td>
+							<td th:text=${transfer.amountCurr}></td>
+						</tr>
 
-				</table>
+						<tr><td></td><td></td></tr>
+						<tr>
+							<td><b>Remark</b></td>
+							<td th:text=${transfer.message}></td>
+						</tr>
+
+					</table>
 			</div>
-		</div>
 
-
+			<div class="box">
+				<form action="#" th:action="@{/home}">
+				<button type="submit" style="font-size:100%; letter-spacing: 2px;">BACK</button><br>
+				</form>
+			</div>
 	</div>
 </div>
 </body>

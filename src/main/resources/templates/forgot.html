@@ -2,6 +2,7 @@
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
     <title>Forgot Password</title>
+    <link rel="icon" th:href="@{/resources/img/logo_only.png}" type="image/gif" sizes="16x16">
     <link rel="stylesheet" type="text/css" th:href="@{/resources/css/login.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/resources/css/alert.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/resources/css/footer.css}"/>
@@ -21,6 +22,7 @@
     </center>
 
     <div class="box" style="width:50%">
+    Please provide your username and email. We’ll send you a link where you can reset your password.
         <form action="#" th:action="@{/forgot}" th:object="${user}" method="post">
 
             <div th:class="${alert}" th:if="${message}" >
@@ -33,9 +35,11 @@
             <i class="fas fa-envelope"></i>
             <input type="text" placeholder="Enter Email" th:field="*{email}" />
 
-             <button type="submit" style="font-size:80%"><b>S E N D - E M A I L</b></button>
+             <button type="submit" style="font-size:80%; letter-spacing:2px "><b>Send an Email</b></button>
 
         </form>
+        <p style="font-size:90%; color:#909497">If you have forgotten your email address, please contact our customer service officer at xxx-xxx-xxx. </p>
+        
         <center>
             <form action="#" th:action="@{/login}">
                 <button type="submit" style="font-size:80%; width: 50%; background: rgb(24,187,217); background: linear-gradient(90deg, rgba(24,187,217,1) 0%, rgba(76,184,243,1) 59%, rgba(201,162,242,1) 100%);">
@@ -50,7 +54,7 @@
     </div>
 </div>
 
-<div class="container" style="background-color:white; padding: 50px"> </div>
+<div class="container" style="background-color:white; padding: 40px"> </div>
 <hr>
 <div class="row">
     <div class="column">

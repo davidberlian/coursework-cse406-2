@@ -2,29 +2,76 @@
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Create an account</title>
+<link rel="icon" th:href="@{/resources/img/logo_only.png}" type="image/gif" sizes="16x16">
+<link rel="stylesheet" type="text/css" th:href="@{/resources/css/signup.css}"/>
+<link rel="stylesheet" type="text/css" th:href="@{/resources/css/alert.css}"/>
+<link rel="stylesheet" type="text/css" th:href="@{/resources/css/footer.css}"/>
 </head>
 <body>
 
 
 
-	asda
-	<div th:if="${message}" th:text="${message}"
-		th:class="${'alert ' + alertClass}"></div>
+<div class="header">
+	<a th:href="@{/logout}" class="logo"> <span><img th:src="@{/resources/img/logo.png}" style="width:150px;height:45px" /></span></a>
+	<div class="header-right">
+		<a href="signup"  style = "background-color: #3C59D5; color : white">Create a online account</a>
+	</div>
+</div>
 
-	<form action="#" th:action="@{/createaccount}"
-		th:object="${dummyAccount}" method="post">
-		<input type="text" placeholder="First Name" th:field="*{first_name}" />
-		<input type="text" placeholder="Last name" th:field="*{last_name}" />
-		<input type="date" placeholder="Date Of Birth" th:field="*{dob}" />
-		<input type="number" placeholder="Init Balance"
-			th:field="*{initial_balance}" /> <input type="text"
-			placeholder="Savings ID" th:field="*{savings_id}" /> <input
-			type="password" placeholder="password" th:field="*{password}" />
-		<button type="submit" style="font-size: 80%">
-			<b>Creeate</b>
-		</button>
+<center>
+	<h1>Create an Account</h1>
+</center>
+
+<div class="box">
+	<div th:if="${message}" th:text="${message}" th:class="${'alert ' + alertClass}"></div>
+	<form action="#" th:action="@{/createaccount}" th:object="${dummyAccount}" method="post">
+		<p>First Name: 			<input type="text" th:field="*{first_name}"/></p>
+		<p>Last Name: 			<input type="text" th:field="*{last_name}" /></p>
+		<p>Date of Birth		<input type="date" placeholder="Date Of Birth" th:field="*{dob}" /></p>
+		<p>Saving ID Number: 	<input type="text" th:field="*{savings_id}" /></p>
+		<p>Initial Balance: 	<input type="number" th:field="*{initial_balance}" /></p>
+		<p>Password: 			<input type="password" th:field="*{password}" /></p>
+		<button type="submit" style="font-size:100%; letter-spacing: 2px;"> Create </button>
 	</form>
+</div>
+
+
+
+<hr>
+<div class="row">
+	<div class="column">
+		<div class="footertext">
+			<a style="font-size: 13px; color:#AED6F1; text-decoration:none"><b>OUR PRODUCT</b></a><br>
+			<a href="#"  style="color:#BBEEFE; text-decoration:none">Loans</a><br>
+			<a href="#"  style="color:#BBEEFE; text-decoration:none">Cards</a><br>
+			<a href="#"  style="color:#BBEEFE; text-decoration:none">Digital Banking</a>
+		</div>
+	</div>
+	<div class="column">
+		<div class="footertext">
+			<a style="font-size: 13px; color:#AED6F1; text-decoration:none"><b>ABOUT US</b></a><br>
+			<a href="#"  style="color:#BBEEFE; text-decoration:none">About EE Bank</a><br>
+			<a href="#"  style="color:#BBEEFE; text-decoration:none">Corporate Governance</a><br>
+			<a href="#"  style="color:#BBEEFE; text-decoration:none">CSR</a>
+		</div>
+	</div>
+	<div class="column">
+		<div class="footertext">
+			<a style="font-size: 13px; color:#AED6F1; text-decoration:none"><b>SUPPORTS</b></a><br>
+			<a href="#"  style="color:#BBEEFE; text-decoration:none">Contact Us</a><br>
+			<a href="#"  style="color:#BBEEFE; text-decoration:none">FAQs</a><br>
+			<a href="#"  style="color:#BBEEFE; text-decoration:none">Term of Use</a>
+		</div>
+	</div>
+
+	<div class="column">
+		<div class="footertext">
+			<p style="font-size: 13px; color:#AED6F1;"><b>EE-BANK CALL CENTER</b></p>
+			<p style="font-size: 27px"> XX-XXXX-XXX</p>
+		</div>
+	</div>
+</div>
 
 </body>
 </html>
