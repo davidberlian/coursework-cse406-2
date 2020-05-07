@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +21,7 @@ import java.util.Locale;
 public class RequestController {
 
     @PostMapping("/request")
-    public String request2(Model model, HttpServletRequest request, @ModelAttribute Transfer transfer){
+    public String request2(RedirectAttributes redirectAttrs, Model model, HttpServletRequest request, @ModelAttribute Transfer transfer){
         System.out.println(transfer.getResponse()+" "+transfer.toString2());
 
         User user = new User();
@@ -43,12 +44,15 @@ public class RequestController {
                         if (transfer.checkDestination() && transfer.checkBalance()) {
                             model.addAttribute("transfer", transfer);
                             return "transfer_confirmation.html";
+                        }else {
+                        	   redirectAttrs.addAttribute("alertClass", "alert");
+                        	   redirectAttrs.addAttribute("message2", "FAILED to accept request please ensure you have enough balance");
+                           
+                        	return "redirect:/request";
                         }
-                    }else{
-
                     }
                 }
-                return "request";
+            	return "redirect:/request";
 
             }else{
                 // update to 2
@@ -77,7 +81,10 @@ public class RequestController {
 				String userBalance = format.format(user.getSavings());
 				model.addAttribute("userBalance", userBalance);
                 model.addAttribute("user", user);
-                
+
+        		model.addAttribute( "message2" ,model.asMap().get("message2"));
+        		model.addAttribute( "alert" ,model.asMap().get("alert"));
+        		
                 
                 if (newTransferRequest != null) {
                     if (newTransferRequest.getDestination_id() != null

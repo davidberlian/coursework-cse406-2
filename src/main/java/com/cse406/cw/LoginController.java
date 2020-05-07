@@ -84,8 +84,12 @@ public class LoginController {
 	public String logout(Model model, HttpServletRequest request) {
 		User user = new User();
 		HttpSession newSession = request.getSession(); // create session
-		user.setUsername(newSession.getAttribute("username").toString());
-		user.removeToken(1);
+		try{
+			user.setUsername(newSession.getAttribute("username").toString());
+			user.removeToken(1);
+		}catch(Exception e) {
+			
+		}
 		newSession.invalidate();
 		return "index";
 	}

@@ -45,6 +45,12 @@
         </div>
 
 
+			<div th:class="${alert}" th:if="${message2}" >
+				<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+				<p th:text="${message2}"/>
+			</div>
+			<br>
+			
         <div class="w3-container">
 
             <table class="w3-table-all w3-hoverable">
@@ -79,7 +85,6 @@
         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
         <strong></strong><p th:text="${message}"/>
     </div>
-
     <h2>Request</h2>
 
     <div class="w3-bar w3-black">
@@ -92,7 +97,9 @@
         <div class="box">
             <div  id="newRequest"  class="w3-container city" >
                 <form action="#" th:action="@{/request}" th:object="${newTransferRequest}" method="get">
-                    <input type="hidden" id="accountNumber" th:field="*{accountNumber}"/>
+                 
+                 
+			   <input type="hidden" id="accountNumber" th:field="*{accountNumber}"/>
                     <p>Request to: <input type="number" th:field="*{destination_id}"/></p>
                     <p>Amount: <input type="number" th:field="*{amount}"/></p>
                     <p>Message: <input type="text" th:field="*{message}" /></p>
