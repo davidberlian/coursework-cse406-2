@@ -144,6 +144,28 @@ public class User {
 		return false;
 	}
 	
+	public Boolean deleteAccount() {
+		
+		conn = new DB_Connection();
+		
+		String query = "UPDATE savings SET user_id = 0 WHERE savings.id = '"+this.accountNumber+"'";
+		
+		Boolean result = conn.write_query(query);
+		
+		if(result) {
+			query = "DELETE FROM user where user.username = '"+this.username+"'";
+			result = conn.write_query(query);
+			if(result) {
+				return true;
+			}else {
+				return false;
+			}
+		}else {
+			return false;
+		}
+		
+	}
+	
 	public Boolean checkToken() {
 
 		conn = new DB_Connection();
@@ -305,6 +327,6 @@ public class User {
 	public void setAccountNumber(String accountNumber) {
 		this.accountNumber = accountNumber;
 	}
-  
+
 
 }

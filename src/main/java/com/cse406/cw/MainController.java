@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cse406.cw.models.User;
 import com.cse406.cw.models.*;
@@ -71,30 +72,6 @@ public class MainController {
 			return "redirect:/login";
 		}
 	}
-	@GetMapping("/setting")
-	public String setting(Model model, HttpServletRequest request) { 
-
-		User user = new User();
-		HttpSession newSession = request.getSession();
-		System.out.println("SESSION DATA" + newSession.getAttribute("token").toString());
-		user.setUsername(newSession.getAttribute("username").toString());
-		user.setToken(newSession.getAttribute("token").toString());
-
-		if(user.checkToken()) {
-
-			model.addAttribute("user", user);
-			return "setting";
-
-		}else {
-			System.out.println("Failed");
-			model.addAttribute("message", "Please Login!");
-		    model.addAttribute("user", new User());
-			newSession.invalidate();
-			return "login";
-		}
-	
-	}
-
 
 	@GetMapping("/personal") 
 	public String personal(Model model, HttpServletRequest request) { 
@@ -106,8 +83,11 @@ public class MainController {
 		user.setToken(newSession.getAttribute("token").toString());	
 		
 		if(user.checkToken()) {	
-			
+
+			NumberFormat format = NumberFormat.getCurrencyInstance(Locale.US);
+			String userBalance = format.format(user.getSavings());
 			model.addAttribute("user", user);
+			model.addAttribute("userBalance", userBalance);
 			return "personal";	
 			
 		}else {

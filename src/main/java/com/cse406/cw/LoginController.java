@@ -122,14 +122,14 @@ public class LoginController {
 		// check token
 		// update password
 		try{
-			if(user.checkForgotToken() && user.getPassword().equals(user.getPassword2())){
+			if(user.checkForgotToken() && user.getPassword().equals(user.getPassword2()) && user.getPassword().length() >= 7){
 				user.disolveToken();
 				user.updatePassword();
 				redirectAttrs.addFlashAttribute("alert","alert2");
 				redirectAttrs.addFlashAttribute("message","your password has been successfully updated");
 				return "redirect:/login";
 			}else{redirectAttrs.addFlashAttribute("alert","alert");
-				redirectAttrs.addFlashAttribute("message","Invalid Data");
+				redirectAttrs.addFlashAttribute("message","Invalid Data nb: min password length is 7");
 				return "redirect:/resetpassword";
 			}
 		}catch (Exception e){
@@ -264,7 +264,7 @@ public class LoginController {
 		}else {		
 			model.addAttribute("user", new Signup());
 			System.out.println("Failed 2");
-			model.addAttribute("message", "Please fill all the field correctly");
+			model.addAttribute("message", "Please fill all the field correctly nb: minimum password length is 7");
 			return "signup";
 		}
 	}

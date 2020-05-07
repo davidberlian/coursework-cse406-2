@@ -1,150 +1,134 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Home: Internet Banking</title>
-<link rel="stylesheet" type="text/css" th:href="@{/resources/css/home.css}" />
-<link rel="stylesheet" type="text/css" th:href="@{/resources/css/sidebar.css}" />
-<link rel="stylesheet" type="text/css" th:href="@{/resources/css/insideApplication.css}" /> 
-<link rel="stylesheet" type="text/css" th:href="@{/resources/css/footer.css}"/>
-	
+	<script src="https://kit.fontawesome.com/6e68db03e6.js" crossorigin="anonymous"></script>
+	<meta charset="UTF-8">
+	<title>Fund Transfer</title>
+	<link rel="icon" th:href="@{/resources/img/logo_only.png}" type="image/gif" sizes="16x16">
+	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/alert.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/transfer.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/sidebar.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/footer.css}"/>
 </head>
-
-<body> 
+<body>
 
 <div class="sidebar">
-<br>
-  <a th:href="@{/home}"><i class="fa fa-fw fa-home"></i> Home</a><br>
-  <a th:href="@{/setting}"><i class="fa fa-fw fa-wrench"></i> Setting</a ><br>
-  <a th:href="@{/personal}"><i class="fa fa-fw fa-user"></i> Personal Info</a><br>
+	<br>
+	<a th:href="@{/home}"><i class="fa fa-fw fa-home"></i> Home</a><br>
+	<a th:href="@{/setting}"><i class="fa fa-fw fa-wrench"></i> Setting</a ><br>
+	<a th:href="@{/personal}"><i class="fa fa-fw fa-user"></i> Personal Info</a><br>
 </div>
 
-	<div class="main">
-		<div class="header">
-			<a href="#default" class="logo"> <span><img
-					th:src="@{/resources/img/logo.png}"
-					style="width: 155px; height: 45px" /></span></a>
-			<div class="header-right">
-				<form action="#" th:action="@{/logout}">
-					<a>
-						<p style="font-size: 100%; letter-spacing: 2px">
-						<p th:text="'Hello, ' + ${user.username} + '!'" />
-						</p>
-					</a>
-					<button type="submit"
-						style="border: 1pxl; background: white; color: #FC5A5A; font-size: 250%">
-						<i class="fas fa-sign-out-alt"></i>
-					</button>
-				</form>
-			</div>
+<div class = "main">
+
+	<div class="header">
+		<a th:href="@{/home}" class="logo"> <span><img th:src="@{/resources/img/logo.png}"style="width:155px;height:45px" /></span></a>
+		<div class="header-right">
+			<form action="#" th:action="@{/logout}">
+				<button type="submit" class="pull-right" style = "border: 1pxl; background: white; color: #FC5A5A; font-size:250%">
+					<i class="fas fa-sign-out-alt"></i></button>
+			</form>
 		</div>
+	</div>
+	<div class="header" style="background: rgb(24,187,217); background: linear-gradient(90deg, rgba(24,187,217,1) 0%, rgba(76,184,243,1) 59%, rgba(201,162,242,1) 100%)"> </div>
 
-		<div class="header" style="background-color: #4CB8F3"></div>
-		<br>
+	<div class="container" style="background-color:white">
+		<center>
+			<h2 style="font-size:200%">change password</h2><br>
+		</center>
+		<div class="box">
+			<form action="#" th:action="@{/changepassword}" th:object="${user}" method="post">
 
-		<div class="img">
-			<img th:src="@{/resources/img/balance.png}" alt="balance"
-				style="width: 300px; height: 250px">
-			<div class="topcentered" style="color: #4F4E56">Cash Balance</div>
-			<div class="centered" style="color: #4F4E56; font-size: 350%">
-				<p th:text="'$' + ${user.savings}" />
-			</div>
+				<div th:class="${alertClass}" th:if="${message}" >
+					<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+					<strong>Please re-check</strong><p th:text="${message}"/>
+				</div>
+				<table>
+					<tr>						
+						<td>Username: </td>
+						<td><input type="text" disabled th:value="${old_user.username}" />
+							<input type="hidden" id="username" th:name="username" th:id="username" th:value="${old_user.username}"/></td>
+					</tr>
+					<tr>
+						<td>Old Password: </td>
+						<td><input type="password" th:field="*{oldPassword}" /></td>
+					</tr>
+					<tr>
+						<td>New Password: </td>
+						<td><input type="password" th:field="*{password}" /></td>
+					</tr>
+					<tr>
+						<td>New Password: </td>
+						<td><input type="password" th:field="*{password2}" /></td>
+					</tr>
+				</table>
+				<button type="submit" style="font-size:80%"><b>Change Password</b></button>
+			</form>
 		</div>
-
-
-		<br>
-
-		<div class="container" style="background-color:#AED6F1;" >
-				<center> 
-							<p style="font-size:250%;  letter-spacing: 4px; color: royalblue">Setting</p> 
-				</center>
 		<hr>
-			
-			
-			<div class="row" style="background-color:#F2F3F4 ;"> 
-				
-				<div class="col-md-4"> 
-				<p th:text="'Current Name:  ' + ${user.username}" />
-				<br> 
-				<p> Would you like to change your name? <p/>
-	  				<label for="fname">First name:</label><br>
-	 				<input type="text" id="fname" name="fname" value="Enter new name"><br> 
-	 			<br> 	
-	 			<p> Language: English </p> 	
-	  			
-	  			
-	  			<br>
-	  				<form action="#"  >
-						<button type="submit">
-						<br><br><i class="fas fa-scroll"  style = "font-size: 400%"></i> <br><br> Delete Account<br><br></button>
-					</form>
-			
-			</div>	
-				
-				
-				
-				
-				
-				
-				
+		<center>
+			<h2 style="font-size:200%">Remove Account</h2><br>
+		</center>
+		<div class="box">
+			<form action="#" th:action="@{/removeaccount}" th:object="${user}" method="post">
+
+				<div th:class="${alertClass}" th:if="${message2}" >
+					<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+					<strong>Please re-check</strong><p th:text="${message2}"/>
 				</div>
-				
+				<table>
+					<tr>						
+						<td>Username: </td>
+						<td><input type="text" disabled th:value="${old_user.username}" />
+							<input type="hidden" id="username" th:name="username" th:id="username" th:value="${old_user.username}"/></td>
+					
+					</tr>
+					<tr>						
+						<td>Password: </td>
+						<td><input type="password" th:field="*{password}" /></td>
+					</tr>
+				</table>
+				<button type="submit" style="font-size:80%; background-color:red;"><b>Remove Account</b></button>
+			</form>
+		</div>
+	</div>
+
+	<div class="container" style="background-color:white; padding:70px"> </div>
+
+	<div class="row">
+		<div class="column">
+			<div class="footertext">
+				<a style="font-size: 13px; color:#AED6F1; text-decoration:none"><b>OUR PRODUCT</b></a><br>
+				<a href="#"  style="color:#BBEEFE; text-decoration:none">Loans</a><br>
+				<a href="#"  style="color:#BBEEFE; text-decoration:none">Cards</a><br>
+				<a href="#"  style="color:#BBEEFE; text-decoration:none">Digital Banking</a>
+			</div>
+		</div>
+		<div class="column">
+			<div class="footertext">
+				<a style="font-size: 13px; color:#AED6F1; text-decoration:none"><b>ABOUT US</b></a><br>
+				<a href="#"  style="color:#BBEEFE; text-decoration:none">About EE Bank</a><br>
+				<a href="#"  style="color:#BBEEFE; text-decoration:none">Corporate Governance</a><br>
+				<a href="#"  style="color:#BBEEFE; text-decoration:none">CSR</a>
+			</div>
+		</div>
+		<div class="column">
+			<div class="footertext">
+				<a style="font-size: 13px; color:#AED6F1; text-decoration:none"><b>SUPPORTS</b></a><br>
+				<a href="#"  style="color:#BBEEFE; text-decoration:none">Contact Us</a><br>
+				<a href="#"  style="color:#BBEEFE; text-decoration:none">FAQs</a><br>
+				<a href="#"  style="color:#BBEEFE; text-decoration:none">Term of Use</a>
+			</div>
 		</div>
 
+		<div class="column">
+			<div class="footertext">
+				<p style="font-size: 13px; color:#AED6F1;"><b>EE-BANK CALL CENTER</b></p>
+				<p style="font-size: 27px"> XX-XXXX-XXX</p>
+			</div>
+		</div>
+	</div>
 
-	
-
-	<div class= "header" style="background-color:white; padding: 130px"></div>
-	<hr>
-		<div class="row">
-			<div class="column">
-				<div class="footertext">
-					<a style="font-size: 13px; color:#AED6F1; text-decoration:none"><b>OUR PRODUCT</b></a><br>
-					<a href="#"  style="color:#BBEEFE; text-decoration:none">Loans</a><br>
-					<a href="#"  style="color:#BBEEFE; text-decoration:none">Cards</a><br>
-					<a href="#"  style="color:#BBEEFE; text-decoration:none">Digital Banking</a>
-				</div>
-			</div>
-			<div class="column">
-				<div class="footertext">
-					<a style="font-size: 13px; color:#AED6F1; text-decoration:none"><b>ABOUT US</b></a><br>
-					<a href="#"  style="color:#BBEEFE; text-decoration:none">About EE Bank</a><br>
-					<a href="#"  style="color:#BBEEFE; text-decoration:none">Corporate Governance</a><br>
-					<a href="#"  style="color:#BBEEFE; text-decoration:none">CSR</a>
-				</div>
-			</div>
-			<div class="column">
-				<div class="footertext">
-					<a style="font-size: 13px; color:#AED6F1; text-decoration:none"><b>SUPPORTS</b></a><br>
-					<a href="#"  style="color:#BBEEFE; text-decoration:none">Contact Us</a><br>
-					<a href="#"  style="color:#BBEEFE; text-decoration:none">FAQs</a><br>
-					<a href="#"  style="color:#BBEEFE; text-decoration:none">Term of Use</a>
-				</div>
-			</div>
-		
-			<div class="column">
-				<div class="footertext">
-					<p style="font-size: 13px; color:#AED6F1;"><b>EE-BANK CALL CENTER</b></p>
-					<p style="font-size: 27px"> XX-XXXX-XXX</p>
-				</div>
-			</div>
-		</div> 
 </div>
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-
-
-
-
 </body>
 </html>

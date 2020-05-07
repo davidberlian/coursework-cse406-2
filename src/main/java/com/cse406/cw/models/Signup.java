@@ -15,7 +15,8 @@ public class Signup {
 	private String savings_id;
 	private String email;
 	private String token;
-
+	private String oldPassword;
+	
 	public String getDob() {
 		return dob;
 	}
@@ -29,7 +30,9 @@ public class Signup {
 	public Signup() {
 		
 	}
-	
+	public String toString2() {
+		return this.username + " " + this.oldPassword + " " + this.password + " " + this.password2;
+	}
 	public Boolean checkfield() {
 
 		String regex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
@@ -42,7 +45,7 @@ public class Signup {
 				this.password.isEmpty() ||
 				this.password2.isEmpty() ||
 				this.savings_id.isEmpty() ||
-				this.dob.isEmpty() || !matcher.matches() ||
+				this.dob.isEmpty() || !matcher.matches() || this.password.length() < 7 ||
 			 	!this.password.toString().equals(this.password2.toString())) {
 			System.out.println("Dsini "+this.password + " " + this.password2 + " = "+ this.password.toString().equals(this.password2.toString()));
 			return false;
@@ -224,5 +227,13 @@ public class Signup {
 
 	public void setToken(String token) {
 		this.token = token;
+	}
+
+	public String getOldPassword() {
+		return oldPassword;
+	}
+
+	public void setOldPassword(String oldPassword) {
+		this.oldPassword = oldPassword;
 	}
 }
