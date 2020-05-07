@@ -117,7 +117,9 @@ public class TransferController {
                     }else{
                         System.out.println("REQUEST ID NOT DETECTED");
                     }
-                    if(transfer.send()){
+                    System.out.println("Full Name"+ transfer.getFullName());
+                    System.out.println("Full Name"+ user.getFullName());
+                    if(transfer.send(user.getFullName())){
                         model.addAttribute("transfer", transfer);
                         model.addAttribute("user", user);
                         return "transfer_receipt.html";

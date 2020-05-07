@@ -261,7 +261,7 @@ public class Transfer {
         }
     }
 
-    public boolean send(){
+    public boolean send(String senderName){
         try {
             //INSERT INTO `transaction`(`id`, `savings_id`, `transaction_id`, `transaction_message`, `transaction_amount`,
             // `transaction_time`) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5],[value-6])
@@ -275,7 +275,7 @@ public class Transfer {
             Boolean Response= conn.write_query(query);
             if(Response) {
                 query = "INSERT INTO transaction (savings_id, transaction_id, transaction_message, transaction_amount) VALUES "+
-                        "('"+this.destination_id+"',2,' FROM "+this.fullName.substring(0,this.fullName.indexOf(" ")) + " , " +this.message+"',"+this.amount+")";
+                        "('"+this.destination_id+"',2,' FROM "+senderName.substring(0,this.fullName.indexOf(" ")) + " , " +this.message+"',"+this.amount+")";
                 System.out.println(query);
                 Response = conn.write_query(query);
                 if(Response){
