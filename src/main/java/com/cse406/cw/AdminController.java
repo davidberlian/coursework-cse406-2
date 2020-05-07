@@ -30,7 +30,7 @@ public class AdminController {
 		System.out.println(user.getPassword());
 		if(user.getPassword() != "" && user.getUsername() != "") {
 			if(user.check_admin_password()) {
-				System.out.println("Success");
+				System.out.println("Success login");
 				newSession.setAttribute("username", user.getUsername());
 				newSession.setAttribute("token", user.getToken());
 				return "redirect:/adminhome";
