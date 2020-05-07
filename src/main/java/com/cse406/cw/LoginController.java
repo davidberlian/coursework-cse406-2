@@ -149,7 +149,7 @@ public class LoginController {
 					System.out.println("93 check success"+user.getEmail());
 					if(sendMail(user.getEmail(),token)){
 						user.insertForgotToken(token);
-						redirectAttrs.addFlashAttribute("message","if. your email and username match the system data, an email will be sent");
+						redirectAttrs.addFlashAttribute("message","if your email and username match the system data, an email will be sent");
 						redirectAttrs.addFlashAttribute("alert","alert2");
 						return "redirect:/forgot";
 					}else{
