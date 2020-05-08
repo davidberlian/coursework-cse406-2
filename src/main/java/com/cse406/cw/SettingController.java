@@ -60,7 +60,7 @@ public class SettingController {
 				if(user.check_password()) {
 					if(user.deleteAccount()) {
 						redirectAttrs.addFlashAttribute("alert","alert2");
-						redirectAttrs.addFlashAttribute("message","your acccount has been successfully deleted");
+						redirectAttrs.addFlashAttribute("message","Your acccount has been successfully deleted");
 						user.removeToken(1);
 						return "redirect:/login";	
 					}else {
@@ -70,7 +70,7 @@ public class SettingController {
 					}
 				}else {
 					redirectAttrs.addFlashAttribute("alert","alert");
-					redirectAttrs.addFlashAttribute("message2","your password did not match");
+					redirectAttrs.addFlashAttribute("message2","Your password did not match");
 					return "redirect:/setting";		
 				}
 			}else {
@@ -112,16 +112,16 @@ public class SettingController {
 						user.removeToken(1);
 						newSession.invalidate();
 						redirectAttrs.addFlashAttribute("alert","alert2");	
-						redirectAttrs.addFlashAttribute("message","your password has been successfully updated");
+						redirectAttrs.addFlashAttribute("message","Your password has been successfully updated");
 						return "redirect:/login";
 					}else {
 						redirectAttrs.addFlashAttribute("alert","alert");
-						redirectAttrs.addFlashAttribute("message","your password did not match");
+						redirectAttrs.addFlashAttribute("message","Your password did not match");
 						return "redirect:/setting";						
 					}
 				}else {
 					redirectAttrs.addFlashAttribute("alert","alert");
-					redirectAttrs.addFlashAttribute("message","your new password did not match or less than 7");
+					redirectAttrs.addFlashAttribute("message","Your new password did not match or less than 7");
 					return "redirect:/setting";
 				}
 					

@@ -130,10 +130,10 @@ public class LoginController {
 				user.disolveToken();
 				user.updatePassword();
 				redirectAttrs.addFlashAttribute("alert","alert2");
-				redirectAttrs.addFlashAttribute("message","your password has been successfully updated");
+				redirectAttrs.addFlashAttribute("message","Your password has been successfully updated");
 				return "redirect:/login";
 			}else{redirectAttrs.addFlashAttribute("alert","alert");
-				redirectAttrs.addFlashAttribute("message","Invalid Data nb: min password length is 7");
+				redirectAttrs.addFlashAttribute("message","Invalid Data: minimum password length is 7");
 				return "redirect:/resetpassword";
 			}
 		}catch (Exception e){
@@ -153,7 +153,7 @@ public class LoginController {
 					System.out.println("93 check success"+user.getEmail());
 					if(sendMail(user.getEmail(),token)){
 						user.insertForgotToken(token);
-						redirectAttrs.addFlashAttribute("message","if your email and username match the system data, an email will be sent");
+						redirectAttrs.addFlashAttribute("message","If your email and username match the system data, an email will be sent");
 						redirectAttrs.addFlashAttribute("alert","alert2");
 						return "redirect:/forgot";
 					}else{
@@ -167,7 +167,7 @@ public class LoginController {
 
 				}
 			}
-			redirectAttrs.addFlashAttribute("message","if your email and username match the system data, an email will be sent");
+			redirectAttrs.addFlashAttribute("message","If your email and username match the system data, an email will be sent");
 			redirectAttrs.addFlashAttribute("alert","alert2");
 			return "redirect:/forgot";
 		}catch (Exception E){
@@ -256,7 +256,7 @@ public class LoginController {
 			if(user.validate()) {
 				model.addAttribute("user", new Signup());
 				System.out.println("Success");
-				redirectAttributes.addFlashAttribute("message", "Registration success please login!!");
+				redirectAttributes.addFlashAttribute("message", "Registration success please login!");
 				redirectAttributes.addFlashAttribute("alert","alert2");
 				return "redirect:/login";
 			}else {
