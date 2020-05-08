@@ -21,7 +21,7 @@
 	<h1>Join Us</h1>
 </center>
 
-<div class="box">
+<div class="box" style="width:40%">
 	<div th:if="${message}" th:text="${message}" th:class="${'alert ' + alertClass}"></div>
 	<form action="#" th:action="@{/signup}" th:object="${user}" method="post">
 		<p>Username: <input type="text" th:field="*{username}" /></p>

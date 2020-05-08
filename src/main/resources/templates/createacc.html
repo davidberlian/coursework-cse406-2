@@ -23,7 +23,7 @@
 	<h1>Create a new Saving Account</h1>
 </center>
 
-<div class="box">
+<div class="box" style="width:40%">
 	<div th:if="${message}" th:text="${message}" th:class="${'alert ' + alertClass}"></div>
 	<form action="#" th:action="@{/adminhome}" th:object="${dummyAccount}" method="post">
 		<p>First Name: 			<input type="text" th:field="*{first_name}"/></p>

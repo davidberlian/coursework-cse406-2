@@ -17,7 +17,7 @@
 		<a th:href="@{/logout}" class="logo"> <span><img th:src="@{/resources/img/logo.png}" style="width:250px;height:75px" /></span></a>
 		<p style="font-size:95%;  letter-spacing: 2px";>Admin Login</p><br>
 	</center>
-	<div class="box" style="width:50%">
+	<div class="box" style="width:30%">
 		<form action="#" th:action="@{/admin}" th:object="${user}" method="post">
 
 			<div th:class="${alert}" th:if="${message}" >
