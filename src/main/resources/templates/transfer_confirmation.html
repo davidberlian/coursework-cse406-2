@@ -20,19 +20,19 @@
 <div class="header" style="background: rgb(24,187,217); background: linear-gradient(90deg, rgba(24,187,217,1) 0%, rgba(76,184,243,1) 59%, rgba(201,162,242,1) 100%)"> </div>
 
 <div class="container" style="background-color:white">
-	<div class="box">
-
+	
 		<div th:class="${alertClass}" th:if="${message}" >
 			<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
 			<strong>Danger!</strong><p th:text="${message}"/>
 		</div>
-		<div class="w3-container">
-			<div class="row" style="text-align:center;">
-				<h2>Transfer Confirmation</h2>
-			</div>
+		
+			<center><h2>Transfer Confirmation</h2></center>
 
-			<div class="box" style="border: 3px solid black; width: 70%;">
+	<div class="img">
+		<img th:src="@{/resources/img/bg_tf.png}" alt="balance" style="width:350px;height:450px">
+			<div class="centered" style="color:black">
 				<center><img th:src="@{/resources/img/logo_only.png}" alt="logo" style="width:40px; height:40 px"></center>
+				<br>
 					<table class="table">
 						<thead>
 						<td></td>
@@ -63,8 +63,9 @@
 						</tr>
 
 					</table>
+					<br><br><br><br>
 			</div>
-
+	</div>
 			<div class="box">
 				<form action="#" th:action="@{/send_transfer}" th:object="${transfer}" method="post">
 					<p><form type="hidden" id="accountNumber" th:field="*{accountNumber}" /></p>
@@ -72,16 +73,16 @@
 					<p><input type="hidden" id="amount" th:field="*{amount}"/></p>
 					<p><input type="hidden" id="message" th:field="*{message}"/></p>
 					<input type="hidden" id="id" name="id" th:value="*{id}"/>
-					<button type="submit" style="font-size:100%; letter-spacing: 2px; background: rgb(24,187,217); background: linear-gradient(90deg, rgba(24,187,217,1) 0%, rgba(76,184,243,1) 59%, rgba(201,162,242,1) 100%)">
-						CONFIRM </button>
+					<center> <button type="submit" style=" width:50%; font-size:100%; letter-spacing: 2px; background: rgb(24,187,217); background: linear-gradient(90deg, rgba(24,187,217,1) 0%, rgba(76,184,243,1) 59%, rgba(201,162,242,1) 100%)">
+						CONFIRM </button></center>
 				</form>
 				<form action="#" th:action="@{/transfer}">
-				<button type="submit" style="font-size:100%; letter-spacing: 2px;">BACK</button><br>
+				<center> <button type="submit" style=" width:50%; font-size:100%; letter-spacing: 2px;">BACK</button></center><br>
 				</form>
 			</div>
-		</div>
-	</div>
+		
 </div>
+
 
 </body>
 </html>
